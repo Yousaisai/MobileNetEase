@@ -1,6 +1,17 @@
-import Vue from 'vue'
-import {Button,RadioGroup, Radio,Tabbar, TabbarItem }  from 'vant'
+import Vue from "vue";
+import {
+  Button,
+  RadioGroup,
+  Radio,
+  Tabbar,
+  TabbarItem,
+  Tab,
+  Tabs,
+  Progress,
+} from "vant";
 
-[Button,RadioGroup,Radio,Tabbar, TabbarItem].forEach(e=>{
-  Vue.use(e)
-})
+[Button, RadioGroup, Radio, Tabbar, TabbarItem, Tab, Tabs, Progress].forEach(
+  (e) => {
+    Vue.use(e);
+  }
+);
