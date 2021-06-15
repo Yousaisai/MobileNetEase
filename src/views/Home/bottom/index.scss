@@ -1,0 +1,28 @@
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 5rem 10rem;
+  padding-bottom: 15rem;
+  .left {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    .item {
+      cursor: pointer;
+      font-size: 28rem;
+      justify-content: space-between;
+      align-items: center;
+      flex: 1;
+    }
+  }
+  .right {
+    flex: 2;
+    display: flex;
+    padding: 0 5rem;
+    align-items: center;
+  }
+}

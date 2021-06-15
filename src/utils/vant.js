@@ -8,10 +8,19 @@ import {
   Tab,
   Tabs,
   Progress,
+  Slider,
 } from "vant";
-
-[Button, RadioGroup, Radio, Tabbar, TabbarItem, Tab, Tabs, Progress].forEach(
-  (e) => {
-    Vue.use(e);
-  }
-);
+let map = [
+  Button,
+  RadioGroup,
+  Radio,
+  Tabbar,
+  TabbarItem,
+  Tab,
+  Tabs,
+  Progress,
+  Slider,
+];
+map.forEach((e) => {
+  Vue.use(e);
+});

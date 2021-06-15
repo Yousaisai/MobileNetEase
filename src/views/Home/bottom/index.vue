@@ -2,56 +2,45 @@
   <div class="content">
     <div class="left">
       <div class="item">
-        <svg-icon style="font-size: 18rem" icon-class="上一首" />
+        <svg-icon icon-class="zuo" />
       </div>
-      <div class="item" v-show="!isPlay">
-        <svg-icon style="font-size: 18rem" icon-class="暂停" />
-      </div>
-      <div class="item" v-show="isPlay">
-        <svg-icon style="font-size: 18rem" icon-class="播放 (3)" />
+      <div class="item" @click="play">
+        <svg-icon v-show="!isPlay" icon-class="zanting" />
+        <svg-icon v-show="isPlay" icon-class="bofang" />
       </div>
       <div class="item">
-        <svg-icon style="font-size: 18rem" icon-class="下一首" />
+        <svg-icon icon-class="you" />
       </div>
     </div>
     <div class="right">
-      <Pro-gress></Pro-gress>
+      <van-slider
+        v-model="value"
+        bar-height="4rem"
+        button-size="12px"
+        inactive-color="#c5c5c5"
+        active-color="#ffffff"
+      >
+      </van-slider>
     </div>
   </div>
 </template>
 <script>
-import ProGress from "./progress/index.vue";
 export default {
-  components: { ProGress },
   data() {
     return {
       isPlay: true,
+      value: 78,
     };
   },
-  methods: {},
+  methods: {
+    play() {
+      console.log(1);
+      this.isPlay = !this.isPlay;
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-.content {
-  display: flex;
-  justify-content: space-around;
-  box-sizing: border-box;
-  margin: 5rem;
-  .left {
-    flex: 1;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 10rem;
-    .item {
-      flex: 1;
-    }
-  }
-  .right {
-    flex: 2;
-    display: flex;
-    align-items: center;
-  }
-}
+@import "./index.scss";
 </style>
