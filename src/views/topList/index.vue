@@ -9,7 +9,6 @@
       <img :src="item.coverImgUrl" alt="" />
       <div class="title">{{ item.name }}</div>
     </div>
-
   </div>
 </template>
 <script>
@@ -18,7 +17,6 @@ export default {
   data() {
     return {
       toplist: [],
-      
     };
   },
   mounted() {
@@ -30,22 +28,16 @@ export default {
       if (cachlist) {
         this.toplist = JSON.parse(cachlist);
       } else {
-        let res = await topList();
-
-        this.toplist = res.list;
-        sessionStorage.setItem("toplist", JSON.stringify(res.list));
+      let res = await topList();
+      this.toplist = res.list;
+      sessionStorage.setItem("toplist", JSON.stringify(res.list));
       }
     },
-    async getList(val) {
-      let res = await playlistDetail({ id: val.id });
-      console.log("res: ", res);
+    getList(val) {
       this.$router.push({
         name: `toplistitem`,
-        params: { list: res.playlist.tracks },
-        query: {
-          name: res.playlist.name,
-          
-        },
+        // params: { list: res.playlist.tracks },
+        query: { id: val.id, name: val.name },
       });
     },
   },

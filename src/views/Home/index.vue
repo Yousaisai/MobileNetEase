@@ -3,7 +3,14 @@
     <div class="bag" :style="{ filter: `blur(${fil}px)` }">
       <img
         id="bag"
-        src="http://p1.music.126.net/vfZOLJbQI35c6HdeF8nVGQ==/109951166089282735.jpg"
+        src=""
+        alt=""
+      />
+    </div>
+        <div class="bag1" >
+      <img
+        id="bag1"
+        src=""
         alt=""
       />
     </div>
@@ -28,34 +35,31 @@ export default {
   components: { elBottom },
   data() {
     return {
-      fil: 300,
       active: 0,
       tab: ["排行榜", "正在播放", "播放列表", "歌曲搜索"],
       routeList: ["toplist", "isplay", "playlist", "search"],
     };
   },
+
   mounted() {
     let name = this.$route.name;
     this.active = this.routeList.indexOf(name);
-    setTimeout(() => {
-      document.getElementById("bag").src =
-        "http://p1.music.126.net/RkB570jeB4wc2V1_-ZbC1Q==/109951166084802032.jpg";
-    }, 2000);
-    let interval = setInterval(() => {
-      this.fil--;
-      if (this.fil == 200) {
-        clearInterval(interval);
-      }
-    }, 50);
+    // setTimeout(() => {
+    //   document.getElementById("bag").src =
+    //     "http://p1.music.126.net/RkB570jeB4wc2V1_-ZbC1Q==/109951166084802032.jpg";
+    // }, 2000);
+  },
+  computed: {
+    fil() {
+      return this.$store.state.fil;
+    },
   },
   methods: {
-    changtab(val){
-            this.$router.push({
-          path: `/${this.routeList[val]}`,
-        });
-      
-
-    }
+    changtab(val) {
+      this.$router.push({
+        path: `/${this.routeList[val]}`,
+      });
+    },
   },
 };
 </script>
@@ -69,12 +73,57 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+    .bag1 {
+    position: fixed;
+    margin: auto;
+
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: blur(300px);
+   
+    img {
+      width: 100%;
+      height:  100%;
+      }}
   .bag {
     position: fixed;
-    top: 20%;
+    margin: auto;
+
+    top: 0;
     left: 0;
-    bottom: 48rem;
+    bottom: 0;
     right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 75vw;
+      height: 75vw;
+      border-radius: 50%;
+      animation: rotateImg 20s linear infinite;
+    }
+    @keyframes rotateImg {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @-webkit-keyframes rotateImg {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
   }
   /deep/.top {
     height: 42rem;
