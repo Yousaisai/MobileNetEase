@@ -7,8 +7,8 @@
   padding: 10rem;
   position: absolute;
   overflow: scroll;
-  .item {  box-sizing: border-box;
-    flex-shrink: 0;
+  .item {
+    box-sizing: border-box;
     width: 24%;
     text-align: center;
     padding: 5rem 1rem;
@@ -16,12 +16,12 @@
       width: 65rem;
       height: 65rem;
     }
-    .title{
+    .title {
       font-size: 12rem;
       padding: 5rem 0;
-   white-space: nowrap;
-overflow:hidden; //超出的文本隐藏
-text-overflow:ellipsis; //溢出用省略号显示
+      white-space: nowrap;
+      overflow: hidden; //超出的文本隐藏
+      text-overflow: ellipsis; //溢出用省略号显示
     }
   }
 }

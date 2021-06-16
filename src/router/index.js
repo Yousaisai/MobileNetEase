@@ -2,10 +2,10 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 //下面两行是解决刷新当前路由会出重复路由的方法
-// const originalPush = VueRouter.prototype.push
-// VueRouter.prototype.push = function push(location) {
-//   return originalPush.call(this, location).catch(err => err)
-// }
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 Vue.use(VueRouter);
 
 const routes = [
@@ -34,6 +34,10 @@ const routes = [
         path: "/search",
         name: "search",
         component: () => import("@/views/search/index.vue"),
+      },  {
+        path: "/toplistitem",
+        name: "toplistitem",
+        component: () => import("@/views/topList/topItem/index.vue"),
       },
     ],
   },

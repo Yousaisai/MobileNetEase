@@ -12,12 +12,13 @@
         title-active-color="#ffffff"
         title-inactive-color="#c5c5c5"
         v-model="active"
+        @click="changtab"
         sticky
       >
         <van-tab v-for="item in tab" :title="item" :key="item"> </van-tab>
       </van-tabs>
     </div>
-    <div class="con"><router-view></router-view></div>
+    <div class="content"><router-view></router-view></div>
     <div class="bottom"><el-bottom></el-bottom></div>
   </div>
 </template>
@@ -37,7 +38,6 @@ export default {
     let name = this.$route.name;
     this.active = this.routeList.indexOf(name);
     setTimeout(() => {
-      console.log(123);
       document.getElementById("bag").src =
         "http://p1.music.126.net/RkB570jeB4wc2V1_-ZbC1Q==/109951166084802032.jpg";
     }, 2000);
@@ -48,13 +48,14 @@ export default {
       }
     }, 50);
   },
-  watch: {
-    active(a, b) {
-      console.log(345);
-      this.$router.push({
-        path: `/${this.routeList[a]}`,
-      });
-    },
+  methods: {
+    changtab(val){
+            this.$router.push({
+          path: `/${this.routeList[val]}`,
+        });
+      
+
+    }
   },
 };
 </script>
@@ -65,7 +66,6 @@ export default {
   height: 100vh;
   box-sizing: border-box;
   background-color: rgba(57, 50, 57, 1);
-
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -81,12 +81,11 @@ export default {
     .van-tabs__nav {
       background: rgba(0, 0, 0, 0);
     }
-
     .van-tabs__line {
       background: rgba(197, 197, 197, 1);
     }
   }
-  .con {
+  .content {
     flex: 1;
     overflow: auto;
     position: relative;
