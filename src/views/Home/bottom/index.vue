@@ -104,8 +104,8 @@ export default {
     songDetail: {
       //如果想打开就有缓存就要立即监听
       handler() {
-        this.start();
         if (this.songDetail != null) {
+          this.start();
           for (const key in this.songDetail) {
             this[key] = this.songDetail[key];
           }
@@ -142,13 +142,11 @@ export default {
     start() {
       this.showStart = true;
       this.playing = true;
-      this.$refs.audio.play();
+      this.$refs.audio ? this.$refs.audio.play() : "";
     },
     // 快进，快退
     editTime(val) {
-
       this.$refs.audio.currentTime = val * 1000;
- 
     },
     //调节声音
     editVol(val) {
@@ -156,21 +154,16 @@ export default {
     },
     // 当timeupdate事件大概每秒一次，用来更新音频流的当前播放时间
     onTimeupdate(res) {
-    //  console.log();
       //同步歌词
       if (this.lyric.length != 0) {
-        // console.log('his.lyric: ', this.lyric);
-        // console.log(this.currentLyric );
-      //   if (
-      //     this.currentLyric != this.lyric.length &&
-      //     this.lyric[this.currentLyric]
-      //   ) {
-         
-          if (this.lyric[this.currentLyric][0] < this.$refs.audio.currentTime*1000) {
-            this.currentLyric++;
-            this.$store.state.currentLyric = this.currentLyric;
-            this.lyricText = this.lyric[this.currentLyric - 1][1];
-          }
+        if (
+          this.lyric[this.currentLyric][0] <
+          this.$refs.audio.currentTime * 1000
+        ) {
+          this.currentLyric++;
+          this.$store.state.currentLyric = this.currentLyric;
+          this.lyricText = this.lyric[this.currentLyric - 1][1];
+        }
         // }
       }
       if (this.$refs.audio.currentTime) {
@@ -182,7 +175,6 @@ export default {
         this.SongTime = parseInt(
           ((this.$refs.audio.currentTime * 1000) / this.time) * 100
         );
-        // console.log('this.SongTime: ', this.SongTime);
       }
     },
     // 当加载语音流元数据完成后，会触发该事件的回调函数
@@ -204,19 +196,7 @@ export default {
     SwitchSongs(val) {
       this.$store.dispatch("SwitchSong", val);
     },
-    TitleScrolling() {
-      setInterval(() => {
-        //ES6箭头函数
-        // 截取首字符串(第一个)
-        var head = this.tit.substring(0, 1);
-        // 截取除首字符串外所有字符串(除第一个所有)
-        var foot = this.tit.substring(1);
-        // 头尾拼接后赋给data => tit属性
-        this.tit = foot + head;
-        // 最后赋给最终显示的标题(标题)
-        document.title = this.tit;
-      }, 800);
-    },
+
     getLikeMusic(val) {},
     download() {
       this.$store.dispatch("DownLoadMusic", this.onesong.id);
@@ -254,7 +234,6 @@ export default {
       }
       this.lyric = lyric;
     },
-
   },
 };
 </script>

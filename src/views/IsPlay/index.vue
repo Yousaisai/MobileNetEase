@@ -1,14 +1,25 @@
 <template>
   <div class="content">
-    <div class="title">{{  watchsong.time!=0 ? watchsong.onesong.name: onesong.name }}</div>
+    <div class="title">
+      <div class="song">
+        {{ watchsong.time != 0 ? watchsong.onesong.name : onesong.name }}
+      </div>
+      <div class="singer">
+        {{
+          watchsong.time != 0
+            ? watchsong.onesong.ar[0].name
+            : onesong.ar[0].name
+        }}
+      </div>
+    </div>
     <div class="ric">
-      <ul>
+      <ul :style="{ transform: `translateY(-${transY}rem)` }">
         <li
           v-for="(item, index) in lyric"
           :class="index == currentLyric ? 'corly' : 'none'"
           :key="index"
         >
-          {{ item?item[1]:"" }}
+          {{ item ? item[1] : "" }}
         </li>
       </ul>
     </div>
@@ -18,19 +29,18 @@
 import { SongDetail, SongLyric } from "@/api/index";
 export default {
   data() {
-    return { lyric: [], isShow: 20 };
+    return { lyric: [], isShow: 20, transY: 0 };
   },
   mounted() {
     this.getLyric();
   },
   computed: {
     currentLyric() {
-      let cur=this.$store.state.currentLyric
-      if (cur<=7) {
-        return cur-1
+      let cur = this.$store.state.currentLyric - 1;
+      if (cur >= 10 && cur < this.lyric.length) {
+        this.transY += 28;
       }
-      this.lyric.shift()
-      return 8;
+      return cur;
     },
     onesong() {
       return JSON.parse(localStorage.getItem("SongDetail")).onesong;
@@ -42,13 +52,14 @@ export default {
   watch: {
     watchsong() {
       this.getLyric();
+      this.transY = 0;
     },
   },
   methods: {
     async getLyric() {
       //获取歌词
       var res = await SongLyric(
-        this.watchsong.time!=0 ? this.watchsong.onesong.id : this.onesong.id
+        this.watchsong.time != 0 ? this.watchsong.onesong.id : this.onesong.id
       );
       if (res.nolyric) {
         this.$message({
@@ -69,7 +80,7 @@ export default {
         if (lyr == null) {
           lyr = ["[00:00.000]"];
         }
-        lyric.push ([...lyr, time]);
+        lyric.push([...lyr, time]);
       });
       for (const key in lyric) {
         let ly = lyric[key][0];
@@ -78,8 +89,8 @@ export default {
         const ms = parseInt(ly.slice(7, 10));
         lyric[key][0] = m * 60 * 1000 + s * 1000 + ms;
       }
-      this.lyric =lyric;
-      
+      this.lyric = lyric;
+
       // console.log('his.lyric: ', this.lyric);
     },
   },
@@ -93,17 +104,32 @@ export default {
   flex-direction: column;
 
   .title {
-    font-size: 18rem;
+    text-align: center;
     padding: 10rem 0;
+    .song {
+      font-size: 18rem;
+    }
+    .singer {
+      font-size: 12rem;
+      transform: scale(0.85);
+    }
   }
   .ric {
     font-size: 14rem;
+    overflow: hidden;
+
+    ul {
+      transition: width 2s, height 2s, transform 1s;
+    }
     ul li {
       line-height: 28rem;
+      font-size: 13rem;
     }
 
     .corly {
       color: #31c27c;
+     transform: scale(1.2);
+     transition: width 2s, height 2s, transform .8s;
     }
   }
 }

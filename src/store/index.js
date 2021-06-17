@@ -7,7 +7,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 Vue.use(Vuex);
-
+var FileSaver = require("file-saver");
 import { PlayOneSong, AuthSongId, DownLoadMusic } from "@/api/index";
 
 export default new Vuex.Store({
@@ -70,7 +70,6 @@ export default new Vuex.Store({
     },
     ST_IndexSong: (state, payload) => {
       state.IndexSong = payload;
-     
     },
     ST_CacheData: (state, payload) => {
       let key = payload.value.key;
@@ -112,7 +111,7 @@ export default new Vuex.Store({
       }); */
       var oneSong = payload.oneSong;
       console.log("oneSong: ", oneSong);
-   
+
       var allSong = payload.allSong;
       var indexSong = payload.indexSong;
 
@@ -124,7 +123,7 @@ export default new Vuex.Store({
         var auth = await AuthSongId(state.PlaySong.id); //首先判断音乐是否可用
         auth = auth.message;
         if (auth != "ok") {
-          Message({
+          Notify({
             message: auth,
             type: "warning",
           });
@@ -133,7 +132,7 @@ export default new Vuex.Store({
           dispatch("AuthSongId", state.PlaySong);
         }
       } catch (e) {
-        Message({
+        Notify({
           message: "暂无播放资源",
           type: "warning",
         });
@@ -165,7 +164,7 @@ export default new Vuex.Store({
         if (auth == "ok") {
           dispatch("AuthSongId", nextSong);
         } else {
-          Message({
+          Notify({
             message: auth,
             type: "warning",
           });
@@ -174,7 +173,7 @@ export default new Vuex.Store({
       } catch (e) {
         //TODO handle the exception
 
-        Message({
+        Notify({
           message: "暂无播放资源",
           type: "warning",
         });
@@ -182,7 +181,6 @@ export default new Vuex.Store({
     },
     //授权的音乐播放
     async AuthSongId({ commit, state }, payload) {
-
       var songs = await PlayOneSong(payload.id);
       var commSong = {
         url: songs.data[0].url,
@@ -193,17 +191,30 @@ export default new Vuex.Store({
         onesong: payload,
       };
       commit("ST_SongDetail", commSong);
+      //tab标题
+
+      let TitleScrolling = function(val) {
+        let tit = "";
+        tit =
+          "正在播放: " +
+          val +
+          "--" +
+          state.SongDetail.onesong.ar[0].name +
+          "       ";
+        document.title = tit;
+      };
+      TitleScrolling(state.SongDetail.name);
       //下面是切换背景图
       document.getElementById("bag").src = state.SongDetail.cover;
       document.getElementById("bag1").src = state.SongDetail.cover;
       state.fil = 500;
       let interval = setInterval(() => {
         state.fil = state.fil - 2;
-        if (state.fil < 0) {
+        if (state.fil < 5) {
           clearInterval(interval);
         }
       }, 100);
-      console.log('state.IndexSong: ',state.SongDetail ,state.IndexSong);
+      console.log("state.IndexSong: ", state.SongDetail, state.IndexSong);
     },
     //往播放列表中加入歌曲
     AddMusic({ commit, dispatch, state }, payload) {
@@ -220,7 +231,7 @@ export default new Vuex.Store({
     },
     DownLoadAllMusic({ state }, payload) {
       if (payload.url == null) {
-        Message({
+        Notify({
           message: "暂无下载资源",
           type: "warning",
         });

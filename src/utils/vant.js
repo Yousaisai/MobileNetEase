@@ -9,6 +9,9 @@ import {
   Tabs,
   Progress,
   Slider,
+  Search,
+  Notify,
+  ShareSheet,Popup
 } from "vant";
 let map = [
   Button,
@@ -20,6 +23,9 @@ let map = [
   Tabs,
   Progress,
   Slider,
+  Notify,
+  Search,
+  ShareSheet,Popup
 ];
 map.forEach((e) => {
   Vue.use(e);
