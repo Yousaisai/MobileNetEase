@@ -171,7 +171,7 @@ export default {
       padding: 5rem 15rem;
       font-size: 24rem;
       .item {
-        padding: 5rem;
+        padding: 3rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -180,7 +180,7 @@ export default {
           padding-top: 5rem;
           font-size: 12rem;
           transform: scale(0.9);
-          width: 68rem;
+          width: 58rem;
           text-align: center;
           white-space: nowrap;
           overflow: hidden; //超出的文本隐藏

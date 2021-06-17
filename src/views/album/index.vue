@@ -4,8 +4,7 @@
 <script>
 
 import Table from "@/components/Table";
-import { Notify } from "vant";
-import { newAlbumDetail, dataType, AlbumComment, SubAlbum } from "@/api/index";
+import { newAlbumDetail, dataType} from "@/api/index";
 export default {
   components: { Table },
   data() {
