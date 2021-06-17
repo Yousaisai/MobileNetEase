@@ -33,12 +33,8 @@
       <div class="items" v-for="(item, index) in MusicData" :key="item.songid">
         <div class="item1" @click="PlaySong(item, index)">
           <div class="ind">
-            <span v-show="PlayIndex != index">{{ index + 1 }}</span>
-            <img
-              style="color: #666666; padding: 0 5rem 0 0"
-              v-show="PlayIndex == index"
-              src="@/icons/pic/wave.gif"
-            />
+            <span >{{ index + 1 }}</span>
+        
           </div>
           <div class="name">{{ item.title }}</div>
           <div class="null"></div>

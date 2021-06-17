@@ -11,7 +11,7 @@
           <img
             style="color: #666666; padding: 0 5rem 0 0"
             v-show="PlayIndex == index"
-            src="@/icons/pic/wave.gif"
+            src="@/icons/svg/wave.gif"
           />
         </div>
         <div class="name">{{ item.name }}</div>
