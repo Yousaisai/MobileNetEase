@@ -2,28 +2,48 @@
   <div class="content">
     <div class="isNull" v-show="playlist.length == 0">列表为空</div>
     <div class="playlist" v-show="playlist.length != 0">
-  <Table :songlist="playlist"></Table>
+      <Table :songlist="playlist"></Table>
     </div>
   </div>
 </template>
 <script>
-import Table from '@/components/Table'
+import Table from "@/components/Table";
 export default {
-    components:{Table},
+  components: { Table },
   data() {
-    return {};
+    return { playlist: [] };
   },
   computed: {
-    playlist() {
-      let res = JSON.parse(localStorage.getItem("AllSongs"));
-      if (res) {
-        return res;
+    addmusic() {
+      return this.$store.state.AllSongs;
+    },
+  },
+  mounted() {
+    this.addsong();
+  },
+  watch: {
+    addmusic: {
+      handler(val) {
+        this.playlist = val;
+      },
+      deep: true,
+    },
+  },
+  methods: {
+    addsong() {
+      let addmusic = this.$store.state.AllSongs;
+      if (addmusic.length > 0) {
+        this.playlist = addmusic;
       } else {
-        return [];
+        let res = JSON.parse(localStorage.getItem("AllSongs"));
+        if (res) {
+          this.playlist = res;
+        } else {
+          return;
+        }
       }
     },
   },
-  methods: {},
 };
 </script>
 

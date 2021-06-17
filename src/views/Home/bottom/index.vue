@@ -62,6 +62,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
   </div>
 </template>
 <script>
+import { Notify } from "vant";
 import { millisToMinutesAndSeconds, SongLyric, SearchSug } from "@/api/index";
 export default {
   data() {
@@ -139,14 +140,14 @@ export default {
       this.$refs.audio.pause();
     },
     //播放
-    start() {
+    async start() {
       this.showStart = true;
       this.playing = true;
-      this.$refs.audio ? this.$refs.audio.play() : "";
+      this.$refs.audio ? await this.$refs.audio.play() : "";
     },
     // 快进，快退
     editTime(val) {
-      this.$refs.audio.currentTime = val * 1000;
+       this.$refs.audio.currentTime= (val /100)*this.time/1000;
     },
     //调节声音
     editVol(val) {
@@ -154,11 +155,12 @@ export default {
     },
     // 当timeupdate事件大概每秒一次，用来更新音频流的当前播放时间
     onTimeupdate(res) {
+      // this.$refs.audio.currentTime  秒级别的 time毫秒
       //同步歌词
       if (this.lyric.length != 0) {
         if (
-          this.lyric[this.currentLyric][0] <
-          this.$refs.audio.currentTime * 1000
+          this.lyric[this.currentLyric] &&
+          this.lyric[this.currentLyric][0] < this.$refs.audio.currentTime * 1000
         ) {
           this.currentLyric++;
           this.$store.state.currentLyric = this.currentLyric;
@@ -206,7 +208,7 @@ export default {
       this.currentLyric = 0;
       var res = await SongLyric(id);
       if (!res.lrc) {
-        this.$message({
+        Notify({
           message: "抱歉，暂无歌词!",
           type: "warning",
         });

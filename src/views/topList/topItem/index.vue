@@ -1,13 +1,13 @@
 <template>
   <div class="content">
-<Table :songlist="songlist"></Table>
+    <Table :songlist="songlist"></Table>
   </div>
 </template>
 <script>
-import Table from '@/components/Table'
+import Table from "@/components/Table";
 import { topList, playlistDetail } from "@/api/index";
 export default {
-    components:{Table},
+  components: { Table },
   data() {
     return {
       songlist: [],
@@ -17,21 +17,10 @@ export default {
     this.initdata();
   },
   methods: {
-   async initdata() {
-    //   let toplist = JSON.parse(sessionStorage.getItem("topitem"));
-    //   if (toplist) {
-    //     this.songlist = toplist;
-    //   } else {
-    //     let list = this.$route.params.list;
-    //     sessionStorage.setItem("topitem", JSON.stringify(list));
-    //     this.songlist = list;
-    // //   }
-    //   console.log(this.songlist[74]);
-    let id=this.$route.query.id
-    console.log('id: ', id);
+    async initdata() {
+      let id = this.$route.query.id;
       let res = await playlistDetail({ id: id });
-      console.log("res: ", res);
-      this.songlist=res.playlist.tracks
+      this.songlist = res.playlist.tracks;
     },
     PlaySong(song, index) {
       this.$store.dispatch("PlaySongs", {
@@ -45,5 +34,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>

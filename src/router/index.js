@@ -38,7 +38,15 @@ const routes = [
         path: "/toplistitem",
         name: "toplistitem",
         component: () => import("@/views/topList/topItem/index.vue"),
-      },
+      }, {
+        path: "/album",
+        name: "album",
+        component: () => import("@/views/album/index.vue"),
+      },{
+        path: "/singer",
+        name: "singer",
+        component: () => import("@/views/singer/index.vue"),
+      }
     ],
   },
 ];

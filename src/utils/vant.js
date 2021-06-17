@@ -23,10 +23,12 @@ let map = [
   Tabs,
   Progress,
   Slider,
-  Notify,
+  
   Search,
   ShareSheet,Popup
 ];
 map.forEach((e) => {
   Vue.use(e);
 });
+
+Vue.use(Notify)

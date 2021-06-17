@@ -26,6 +26,7 @@
   </div>
 </template>
 <script>
+import { Notify } from "vant";
 import { SongDetail, SongLyric } from "@/api/index";
 export default {
   data() {
@@ -62,7 +63,7 @@ export default {
         this.watchsong.time != 0 ? this.watchsong.onesong.id : this.onesong.id
       );
       if (res.nolyric) {
-        this.$message({
+        Notify({
           message: "抱歉，暂无歌词!",
           type: "warning",
         });
@@ -90,8 +91,6 @@ export default {
         lyric[key][0] = m * 60 * 1000 + s * 1000 + ms;
       }
       this.lyric = lyric;
-
-      // console.log('his.lyric: ', this.lyric);
     },
   },
 };
@@ -128,8 +127,8 @@ export default {
 
     .corly {
       color: #31c27c;
-     transform: scale(1.2);
-     transition: width 2s, height 2s, transform .8s;
+      transform: scale(1.2);
+      transition: width 2s, height 2s, transform 0.8s;
     }
   }
 }

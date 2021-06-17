@@ -56,7 +56,7 @@
     <van-popup v-model="show" position="bottom" :style="{ height: '10%' }">
       <div class="pop">
         <div class="item">
-          <div><svg-icon icon-class="geshou" /></div>
+          <div><svg-icon icon-class="yonghu" /></div>
           <div class="item_text">{{ popdata.author }}</div>
         </div>
         <div class="item">
@@ -102,7 +102,6 @@ export default {
     //默认搜索词
     async getDefSearch() {
       var res = await DefSearch();
-      console.log("res: ", res);
       this.DefPlaceHoder = "例如：" + res.data.realkeyword;
       var res1 = await AllNetMusic({
         input: res.data.realkeyword,
@@ -114,7 +113,6 @@ export default {
     },
     async getSearch() {
       var res = await AllNetMusic(this.payload);
-      console.log("res: ", res);
       if (res.code != 200) {
         //   Notify('通知内容');
         Notify({ type: "warning", message: res.error });

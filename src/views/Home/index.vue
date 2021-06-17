@@ -1,18 +1,10 @@
 <template>
   <div class="container">
     <div class="bag" :style="{ filter: `blur(${fil}px)` }">
-      <img
-        id="bag"
-        src=""
-        alt=""
-      />
+      <img id="bag" src="" alt="" />
     </div>
-        <div class="bag1" >
-      <img
-        id="bag1"
-        src=""
-        alt=""
-      />
+    <div class="bag1">
+      <img id="bag1" src="" alt="" />
     </div>
     <div class="top">
       <van-tabs
@@ -44,10 +36,6 @@ export default {
   mounted() {
     let name = this.$route.name;
     this.active = this.routeList.indexOf(name);
-    // setTimeout(() => {
-    //   document.getElementById("bag").src =
-    //     "http://p1.music.126.net/RkB570jeB4wc2V1_-ZbC1Q==/109951166084802032.jpg";
-    // }, 2000);
   },
   computed: {
     fil() {
@@ -73,7 +61,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-    .bag1 {
+  .bag1 {
     position: fixed;
     margin: auto;
 
@@ -85,11 +73,12 @@ export default {
     justify-content: center;
     align-items: center;
     filter: blur(300px);
-   
+
     img {
       width: 100%;
-      height:  100%;
-      }}
+      height: 100%;
+    }
+  }
   .bag {
     position: fixed;
     margin: auto;

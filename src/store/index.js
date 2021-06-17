@@ -9,7 +9,7 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 var FileSaver = require("file-saver");
 import { PlayOneSong, AuthSongId, DownLoadMusic } from "@/api/index";
-
+import { Notify } from "vant";
 export default new Vuex.Store({
   state: {
     fil: 500,
@@ -110,8 +110,6 @@ export default new Vuex.Store({
         indexSong:歌曲序号，便于切换歌曲
       }); */
       var oneSong = payload.oneSong;
-      console.log("oneSong: ", oneSong);
-
       var allSong = payload.allSong;
       var indexSong = payload.indexSong;
 
@@ -214,7 +212,6 @@ export default new Vuex.Store({
           clearInterval(interval);
         }
       }, 100);
-      console.log("state.IndexSong: ", state.SongDetail, state.IndexSong);
     },
     //往播放列表中加入歌曲
     AddMusic({ commit, dispatch, state }, payload) {
