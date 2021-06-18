@@ -31,7 +31,9 @@ export default {
   },
   methods: {
     addsong() {
-      let addmusic = this.$store.state.AllSongs;
+      let addmusic = this.$store.state.AllSongs
+        ? this.$store.state.AllSongs
+        : [];
       if (addmusic.length > 0) {
         this.playlist = addmusic;
       } else {
@@ -55,14 +57,7 @@ export default {
   .isNull {
     width: 100rem;
     height: 100rem;
-    background-color: rgba(57, 50, 57, 1);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin: 0 auto;
   }
 }
 </style>

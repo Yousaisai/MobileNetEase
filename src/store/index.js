@@ -12,7 +12,7 @@ import { PlayOneSong, AuthSongId, DownLoadMusic } from "@/api/index";
 import { Notify } from "vant";
 export default new Vuex.Store({
   state: {
-    fil: 500,
+    fil: 0,
     //最新添加的缓存页面，如果是切换标签页就不需要重新请求页面
     cacheData: {
       Leaderboard: {
@@ -205,13 +205,7 @@ export default new Vuex.Store({
       //下面是切换背景图
       document.getElementById("bag").src = state.SongDetail.cover;
       document.getElementById("bag1").src = state.SongDetail.cover;
-      state.fil = 500;
-      let interval = setInterval(() => {
-        state.fil = state.fil - 2;
-        if (state.fil < 5) {
-          clearInterval(interval);
-        }
-      }, 100);
+      state.fil++;
     },
     //往播放列表中加入歌曲
     AddMusic({ commit, dispatch, state }, payload) {

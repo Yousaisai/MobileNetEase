@@ -1,6 +1,7 @@
 <template>
   <div class="content">
-    <div class="title">
+    <div class="isNull" v-if="lyric.length == 0">播放为空</div>
+    <div class="title" v-else>
       <div class="song">
         {{ watchsong.time != 0 ? watchsong.onesong.name : onesong.name }}
       </div>
@@ -44,7 +45,9 @@ export default {
       return cur;
     },
     onesong() {
-      return JSON.parse(localStorage.getItem("SongDetail")).onesong;
+      return JSON.parse(localStorage.getItem("SongDetail"))
+        ? JSON.parse(localStorage.getItem("SongDetail")).onesong
+        : [];
     },
     watchsong() {
       return this.$store.state.SongDetail;
@@ -101,7 +104,6 @@ export default {
   justify-content: center;
   text-align: center;
   flex-direction: column;
-
   .title {
     text-align: center;
     padding: 10rem 0;
@@ -130,6 +132,11 @@ export default {
       transform: scale(1.2);
       transition: width 2s, height 2s, transform 0.8s;
     }
+  }
+  .isNull {
+    width: 100rem;
+    height: 100rem;
+    margin: 0 auto;
   }
 }
 </style>

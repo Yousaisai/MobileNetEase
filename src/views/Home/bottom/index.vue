@@ -67,8 +67,6 @@ import { millisToMinutesAndSeconds, SongLyric, SearchSug } from "@/api/index";
 export default {
   data() {
     return {
-      isPlay: true,
-      value: 78,
       SongTime: 1,
       showList: false,
       volume: 50, //声音
@@ -89,15 +87,15 @@ export default {
   },
   computed: {
     songDetail() {
-      if (JSON.parse(localStorage.getItem("SongDetail"))) {
-        if (this.$store.state.SongDetail.time != 0) {
-        }
-      } else {
-        this.firstSong();
-      }
-      return JSON.parse(localStorage.getItem("SongDetail"))
-        ? JSON.parse(localStorage.getItem("SongDetail"))
-        : this.$store.state.SongDetail;
+      // if (JSON.parse(localStorage.getItem("SongDetail"))) {
+      //   if (this.$store.state.SongDetail.time != 0) {
+      //   }
+      // } else {
+      //   this.firstSong();
+      // }
+      return this.$store.state.SongDetail
+        ? this.$store.state.SongDetail
+        : JSON.parse(localStorage.getItem("SongDetail"));
       //这里还没那带数据
     },
   },
@@ -141,13 +139,16 @@ export default {
     },
     //播放
     async start() {
-      this.showStart = true;
       this.playing = true;
       this.$refs.audio ? await this.$refs.audio.play() : "";
+      if (this.onesong.id) {
+        this.getLyric(this.onesong.id);
+        this.lyric = [];
+      }
     },
     // 快进，快退
     editTime(val) {
-       this.$refs.audio.currentTime= (val /100)*this.time/1000;
+      this.$refs.audio.currentTime = ((val / 100) * this.time) / 1000;
     },
     //调节声音
     editVol(val) {
@@ -157,6 +158,9 @@ export default {
     onTimeupdate(res) {
       // this.$refs.audio.currentTime  秒级别的 time毫秒
       //同步歌词
+      if (this.playing) {
+        this.showStart = true;
+      }
       if (this.lyric.length != 0) {
         if (
           this.lyric[this.currentLyric] &&
@@ -189,10 +193,10 @@ export default {
       this.tit = ` 正在播放：${this.name} - ${
         this.onesong.ar ? this.onesong.ar[0].name : this.onesong.artists[0].name
       }  `;
-      if (this.onesong.id) {
-        this.getLyric(this.onesong.id);
-        this.lyric = [];
-      }
+      // if (this.onesong.id) {
+      //   this.getLyric(this.onesong.id);
+      //   this.lyric = [];
+      // }
     },
     //切换歌曲
     SwitchSongs(val) {

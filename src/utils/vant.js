@@ -11,7 +11,7 @@ import {
   Slider,
   Search,
   Notify,
-  ShareSheet,Popup
+  ShareSheet,Popup,Lazyload
 } from "vant";
 let map = [
   Button,
@@ -22,7 +22,7 @@ let map = [
   Tab,
   Tabs,
   Progress,
-  Slider,
+  Slider,Lazyload,
   
   Search,
   ShareSheet,Popup
@@ -30,5 +30,6 @@ let map = [
 map.forEach((e) => {
   Vue.use(e);
 });
-
+import { Image as VanImage ,} from 'vant';
 Vue.use(Notify)
+Vue.use(VanImage)

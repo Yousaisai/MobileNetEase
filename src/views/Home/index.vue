@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="bag" :style="{ filter: `blur(${fil}px)` }">
+    <div class="bag" :style="{ filter: `blur(${filters}px)` }">
       <img id="bag" src="" alt="" />
     </div>
     <div class="bag1">
@@ -28,6 +28,7 @@ export default {
   data() {
     return {
       active: 0,
+      filters: 500,
       tab: ["排行榜", "正在播放", "播放列表", "歌曲搜索"],
       routeList: ["toplist", "isplay", "playlist", "search"],
     };
@@ -40,6 +41,18 @@ export default {
   computed: {
     fil() {
       return this.$store.state.fil;
+    },
+  },
+  watch: {
+    fil() {
+      this.filters=100
+     
+      let interval = setInterval(() => {
+        this.filters -= 1;
+        if (this.filters < 5) {
+          clearInterval(interval);
+        }
+      }, 600);
     },
   },
   methods: {
