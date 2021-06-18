@@ -33,8 +33,7 @@
       <div class="items" v-for="(item, index) in MusicData" :key="item.songid">
         <div class="item1" @click="PlaySong(item, index)">
           <div class="ind">
-            <span >{{ index + 1 }}</span>
-        
+            <span>{{ index + 1 }}</span>
           </div>
           <div class="name">{{ item.title }}</div>
           <div class="null"></div>
@@ -49,7 +48,7 @@
         </div>
       </div>
     </div>
-    <van-popup v-model="show" position="bottom" :style="{ height: '10%' }">
+    <van-popup v-model="show" position="bottom" :style="{ height: '68rem' }">
       <div class="pop">
         <div class="item">
           <div><svg-icon icon-class="yonghu" /></div>
@@ -111,7 +110,12 @@ export default {
       var res = await AllNetMusic(this.payload);
       if (res.code != 200) {
         //   Notify('通知内容');
-        Notify({ type: "warning", message: res.error });
+        Notify({
+          background: "#393239e6",
+          color: "#c5c5c5",
+          type: "warning",
+          message: res.error,
+        });
         return;
       }
       this.MusicData = res.data;
@@ -254,8 +258,14 @@ export default {
         justify-content: center;
         align-items: center;
         .item_text {
-          padding-top: 5rem;
+        padding-top: 5rem;
           font-size: 12rem;
+          transform: scale(0.9);
+          min-width: 58rem;
+          text-align: center;
+          white-space: nowrap;
+          overflow: hidden; //超出的文本隐藏
+          text-overflow: ellipsis; //溢出用省略号显示
         }
       }
     }

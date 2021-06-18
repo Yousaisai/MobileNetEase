@@ -1,7 +1,7 @@
 <template>
   <div class="content">
-    <div class="isNull" v-if="lyric.length == 0">播放为空</div>
-    <div class="title" v-else>
+
+    <div class="title" v-if="lyric.length != 0">
       <div class="song">
         {{ watchsong.time != 0 ? watchsong.onesong.name : onesong.name }}
       </div>
@@ -20,7 +20,6 @@
           :class="index == currentLyric ? 'corly' : 'none'"
           :key="index"
         >
-          {{ index }}
           {{ item ? item[1] : "" }}
         </li>
       </ul>
@@ -29,7 +28,7 @@
 </template>
 <script>
 import { Notify } from "vant";
-import { SongDetail, SongLyric } from "@/api/index";
+import { SongLyric } from "@/api/index";
 export default {
   data() {
     return { lyric: [], isShow: 20, transY: 0, nowpage: 9 };
@@ -42,8 +41,6 @@ export default {
       let cur = this.$store.state.currentLyric - 1;
       if (cur >= 10 && cur < this.lyric.length) {
         this.transY = (cur - this.nowpage) * 28; //作用是为了从其他页面来的没有定位到歌词
-        // this.nowpage++;
-        // this.transY+=28
       }
       return cur;
     },
@@ -64,20 +61,31 @@ export default {
   },
   methods: {
     async getLyric() {
+      if (this.onesong.length == 0) {
+        Notify({
+          background: "#393239e6",
+          color: "#c5c5c5",
+          message: "暂无播放列表",
+          type: "success",
+        });
+        return;
+      }
       //获取歌词
       var res = await SongLyric(
         this.watchsong.time != 0 ? this.watchsong.onesong.id : this.onesong.id
       );
       if (res.nolyric) {
         Notify({
+          background: "#393239e6",
+          color: "#c5c5c5",
           message: "抱歉，暂无歌词!",
           type: "warning",
         });
         this.lyricText = "";
         return;
       }
-
       res = res.lrc.lyric.split("\n");
+
       var lyric = [];
       let pattern = /\[\d{2}:\d{2}.\d{2,3}\]/g;
       res.map((val, index) => {

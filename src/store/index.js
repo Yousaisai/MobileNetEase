@@ -122,6 +122,8 @@ export default new Vuex.Store({
         auth = auth.message;
         if (auth != "ok") {
           Notify({
+            background: "#393239e6",
+            color: "#c5c5c5",
             message: auth,
             type: "warning",
           });
@@ -131,6 +133,8 @@ export default new Vuex.Store({
         }
       } catch (e) {
         Notify({
+          background: "#393239e6",
+          color: "#c5c5c5",
           message: "暂无播放资源",
           type: "warning",
         });
@@ -163,6 +167,8 @@ export default new Vuex.Store({
           dispatch("AuthSongId", nextSong);
         } else {
           Notify({
+            background: "#393239e6",
+            color: "#c5c5c5",
             message: auth,
             type: "warning",
           });
@@ -172,6 +178,8 @@ export default new Vuex.Store({
         //TODO handle the exception
 
         Notify({
+          background: "#393239e6",
+          color: "#c5c5c5",
           message: "暂无播放资源",
           type: "warning",
         });
@@ -205,7 +213,15 @@ export default new Vuex.Store({
       //下面是切换背景图
       document.getElementById("bag").src = state.SongDetail.cover;
       document.getElementById("bag1").src = state.SongDetail.cover;
-      state.fil++;
+      let fil = 100;
+      let interval = setInterval(() => {
+        fil -= 0.1;
+        console.log("fil: ", fil);
+        if (fil < 5) {
+          clearInterval(interval);
+        }
+        document.getElementById("bag").style.filter = `blur(${fil}px)`;
+      }, 100);
     },
     //往播放列表中加入歌曲
     AddMusic({ commit, dispatch, state }, payload) {
@@ -223,6 +239,8 @@ export default new Vuex.Store({
     DownLoadAllMusic({ state }, payload) {
       if (payload.url == null) {
         Notify({
+          background: "#393239e6",
+          color: "#c5c5c5",
           message: "暂无下载资源",
           type: "warning",
         });

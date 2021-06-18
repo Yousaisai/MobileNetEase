@@ -1,12 +1,11 @@
 <template>
   <div class="content">
-    <div class="isNull" v-show="playlist.length == 0">列表为空</div>
-    <div class="playlist" v-show="playlist.length != 0">
+    <div class="playlist" v-if="playlist.length != 0">
       <Table :songlist="playlist"></Table>
     </div>
   </div>
 </template>
-<script>
+<script>import { Notify } from "vant";
 import Table from "@/components/Table";
 export default {
   components: { Table },
@@ -41,7 +40,12 @@ export default {
         if (res) {
           this.playlist = res;
         } else {
-          return;
+            Notify({
+        background:"#393239e6",
+        color:"#c5c5c5",
+        message: "暂无播放资源",
+        type: "success",
+      });
         }
       }
     },
@@ -58,6 +62,7 @@ export default {
     width: 100rem;
     height: 100rem;
     margin: 0 auto;
+    text-align: center;
   }
 }
 </style>

@@ -26,7 +26,7 @@
         </div>
       </div>
     </div>
-    <van-popup v-model="show" position="bottom" :style="{ height: '10%' }">
+    <van-popup v-model="show" position="bottom" :style="{ height: '68rem' }">
       <div class="pop">
         <div class="item" @click="singer">
           <div><svg-icon icon-class="yonghu" /></div>
@@ -34,10 +34,7 @@
             {{ popdata.ar ? popdata.ar[0].name : "" }}
           </div>
         </div>
-        <div class="item">
-          <div><svg-icon icon-class="gequ" /></div>
-          <div class="item_text">{{ popdata.name }}</div>
-        </div>
+       
         <div class="item" @click="album">
           <div><svg-icon icon-class="zhuanji" /></div>
           <div class="item_text">{{ popdata.al ? popdata.al.name : "" }}</div>
@@ -100,6 +97,8 @@ export default {
     AddMusic(song) {
       this.$store.dispatch("AddMusic", this.popdata);
       Notify({
+        background:"#393239e6",
+        color:"#c5c5c5",
         message: "添加成功",
         type: "success",
       });
@@ -180,7 +179,7 @@ export default {
           padding-top: 5rem;
           font-size: 12rem;
           transform: scale(0.9);
-          width: 58rem;
+          min-width: 58rem;
           text-align: center;
           white-space: nowrap;
           overflow: hidden; //超出的文本隐藏

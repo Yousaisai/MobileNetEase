@@ -1,17 +1,24 @@
 <template>
   <div class="container">
     <div class="bag">
-      <img id="bag" src="http://p3.music.126.net/Ggpf7jURLCUKKlT4qAUW4Q==/109951165929809633.jpg" alt="" />
+      <img
+        id="bag"
+        src="http://p3.music.126.net/Ggpf7jURLCUKKlT4qAUW4Q==/109951165929809633.jpg"
+        alt=""
+      />
     </div>
     <div class="bag1">
-      <img id="bag1" src="http://p3.music.126.net/Ggpf7jURLCUKKlT4qAUW4Q==/109951165929809633.jpg" alt="" />
+      <img
+        id="bag1"
+        src="http://p3.music.126.net/Ggpf7jURLCUKKlT4qAUW4Q==/109951165929809633.jpg"
+        alt=""
+      />
     </div>
     <div class="top">
       <van-tabs
         swipeable
         title-active-color="#ffffff"
         title-inactive-color="#c5c5c5"
-        v-model="active"
         @click="changtab"
         sticky
       >
@@ -28,8 +35,6 @@ export default {
   components: { elBottom },
   data() {
     return {
-      active: 0,
-      filters: 500,
       tab: ["排行榜", "正在播放", "播放列表", "歌曲搜索"],
       routeList: ["toplist", "isplay", "playlist", "search"],
     };
@@ -38,25 +43,13 @@ export default {
   mounted() {
     let name = this.$route.name;
     this.active = this.routeList.indexOf(name);
+    
   },
   computed: {
     fil() {
       return this.$store.state.fil;
     },
   },
-  // watch: {
-  //   fil() {
-  // :style="{ filter: `blur(${filters}px)` }
-  // this.filters=100
-
-  // let interval = setInterval(() => {
-  //   this.filters -= 1;
-  //   if (this.filters < 5) {
-  //     clearInterval(interval);
-  //   }
-  // }, 1000);
-  //   },
-  // },
   methods: {
     changtab(val) {
       this.$router.push({
@@ -97,7 +90,6 @@ export default {
   .bag {
     position: fixed;
     margin: auto;
-    filter: blur(2rem);
     top: 0;
     left: 0;
     bottom: 0;

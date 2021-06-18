@@ -23,14 +23,13 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
 <template>
   <div class="content">
     <audio
+      id="aud"
       ref="audio"
       :src="url"
       @timeupdate="onTimeupdate"
       @loadedmetadata="onLoadedmetadata"
       preload="auto"
-      :autoplay="false"
-      :muted="true"
-      :loop="false"
+   
     ></audio>
     <div class="left">
       <div class="item">
@@ -58,7 +57,12 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
       </div>
 
       <span v-show="!isLoading"> {{ milltosecond(time) }}</span>
-      <van-loading type="spinner" size="18px" v-show="isLoading" color="#c5c5c5" />
+      <van-loading
+        type="spinner"
+        size="18px"
+        v-show="isLoading"
+        color="#c5c5c5"
+      />
     </div>
   </div>
 </template>
@@ -95,18 +99,21 @@ export default {
       //这里还没那带数据
     },
   },
+  mounted() {
+   this.$audo=document.getElementById("aud")
+  },
   watch: {
     songDetail: {
       //如果想打开就有缓存就要立即监听
       handler() {
         if (this.songDetail != null) {
           this.start();
-          this.isLoading=true
-        
+          this.isLoading = true;
+
           for (const key in this.songDetail) {
             this[key] = this.songDetail[key];
           }
-            if (this.onesong.id) {
+          if (this.onesong.id) {
             this.getLyric(this.onesong.id);
             this.lyric = [];
           }
@@ -137,20 +144,20 @@ export default {
     end() {
       this.showStart = false;
       this.playing = false;
-      this.$refs.audio.pause();
+      this.$audo.pause();
     },
     //播放
-    async start() {
+    start() {  
       this.playing = true;
-      this.$refs.audio ? await this.$refs.audio.play() : "";
+      this.$audo&&this.$audo.play();
     },
     // 快进，快退
     editTime(val) {
-      this.$refs.audio.currentTime = ((val / 100) * this.time) / 1000;
+      this.$audo.currentTime = ((val / 100) * this.time) / 1000;
     },
     //调节声音
     editVol(val) {
-      this.$refs.audio.volume = val / 100;
+      this.$audo.volume = val / 100;
     },
     // 当timeupdate事件大概每秒一次，用来更新音频流的当前播放时间
     onTimeupdate(res) {
@@ -161,25 +168,23 @@ export default {
       }
       if (this.lyric.length != 0) {
         if (
-          
-          this.lyric[this.currentLyric]&& this.lyric[this.currentLyric][0] < this.$refs.audio.currentTime * 1000
-          
+          this.lyric[this.currentLyric] &&
+          this.lyric[this.currentLyric][0] < this.$audo.currentTime * 1000
         ) {
-      
           this.currentLyric++;
           this.$store.state.currentLyric = this.currentLyric;
           // this.lyricText = this.lyric[this.currentLyric - 1][1];
         }
         // }
       }
-      if (this.$refs.audio.currentTime) {
+      if (this.$audo.currentTime) {
         if (
-          parseInt(this.time) == parseInt(this.$refs.audio.currentTime * 1000)
+          parseInt(this.time) == parseInt(this.$audo.currentTime * 1000)
         ) {
           this.SwitchSongs("next");
         }
         this.SongTime = parseInt(
-          ((this.$refs.audio.currentTime * 1000) / this.time) * 100
+          ((this.$audo.currentTime * 1000) / this.time) * 100
         );
       }
     },
@@ -211,12 +216,13 @@ export default {
       this.$store.dispatch("DownLoadMusic", this.onesong.id);
     },
     async getLyric(id) {
-      
       //获取歌词
       this.currentLyric = 0;
       var res = await SongLyric(id);
       if (!res.lrc) {
         Notify({
+          background: "#393239e6",
+          color: "#c5c5c5",
           message: "抱歉，暂无歌词!",
           type: "warning",
         });
