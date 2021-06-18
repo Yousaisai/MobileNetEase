@@ -57,7 +57,8 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
         </van-slider>
       </div>
 
-      <span> {{ milltosecond(time) }}</span>
+      <span v-show="!isLoading"> {{ milltosecond(time) }}</span>
+      <van-loading type="spinner" size="18px" v-show="isLoading" color="#c5c5c5" />
     </div>
   </div>
 </template>
@@ -67,6 +68,7 @@ import { millisToMinutesAndSeconds, SongLyric, SearchSug } from "@/api/index";
 export default {
   data() {
     return {
+      isLoading: true,
       SongTime: 1,
       showList: false,
       volume: 50, //声音
@@ -87,12 +89,6 @@ export default {
   },
   computed: {
     songDetail() {
-      // if (JSON.parse(localStorage.getItem("SongDetail"))) {
-      //   if (this.$store.state.SongDetail.time != 0) {
-      //   }
-      // } else {
-      //   this.firstSong();
-      // }
       return this.$store.state.SongDetail
         ? this.$store.state.SongDetail
         : JSON.parse(localStorage.getItem("SongDetail"));
@@ -105,8 +101,14 @@ export default {
       handler() {
         if (this.songDetail != null) {
           this.start();
+          this.isLoading=true
+        
           for (const key in this.songDetail) {
             this[key] = this.songDetail[key];
+          }
+            if (this.onesong.id) {
+            this.getLyric(this.onesong.id);
+            this.lyric = [];
           }
         }
       },
@@ -141,10 +143,6 @@ export default {
     async start() {
       this.playing = true;
       this.$refs.audio ? await this.$refs.audio.play() : "";
-      if (this.onesong.id) {
-        this.getLyric(this.onesong.id);
-        this.lyric = [];
-      }
     },
     // 快进，快退
     editTime(val) {
@@ -163,12 +161,14 @@ export default {
       }
       if (this.lyric.length != 0) {
         if (
-          this.lyric[this.currentLyric] &&
-          this.lyric[this.currentLyric][0] < this.$refs.audio.currentTime * 1000
+          
+          this.lyric[this.currentLyric]&& this.lyric[this.currentLyric][0] < this.$refs.audio.currentTime * 1000
+          
         ) {
+      
           this.currentLyric++;
           this.$store.state.currentLyric = this.currentLyric;
-          this.lyricText = this.lyric[this.currentLyric - 1][1];
+          // this.lyricText = this.lyric[this.currentLyric - 1][1];
         }
         // }
       }
@@ -190,6 +190,9 @@ export default {
       if (this.playing) {
         this.start();
       }
+      if (res.isTrusted) {
+        this.isLoading = false;
+      }
       this.tit = ` 正在播放：${this.name} - ${
         this.onesong.ar ? this.onesong.ar[0].name : this.onesong.artists[0].name
       }  `;
@@ -208,6 +211,7 @@ export default {
       this.$store.dispatch("DownLoadMusic", this.onesong.id);
     },
     async getLyric(id) {
+      
       //获取歌词
       this.currentLyric = 0;
       var res = await SongLyric(id);

@@ -10,7 +10,7 @@ import {
   Progress,
   Slider,
   Search,
-  Notify,
+  Notify,Loading,
   ShareSheet,Popup,Lazyload
 } from "vant";
 let map = [
@@ -21,7 +21,7 @@ let map = [
   TabbarItem,
   Tab,
   Tabs,
-  Progress,
+  Progress,Loading,
   Slider,Lazyload,
   
   Search,

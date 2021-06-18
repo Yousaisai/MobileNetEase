@@ -20,6 +20,7 @@
           :class="index == currentLyric ? 'corly' : 'none'"
           :key="index"
         >
+          {{ index }}
           {{ item ? item[1] : "" }}
         </li>
       </ul>
@@ -31,7 +32,7 @@ import { Notify } from "vant";
 import { SongDetail, SongLyric } from "@/api/index";
 export default {
   data() {
-    return { lyric: [], isShow: 20, transY: 0 };
+    return { lyric: [], isShow: 20, transY: 0, nowpage: 9 };
   },
   mounted() {
     this.getLyric();
@@ -40,7 +41,9 @@ export default {
     currentLyric() {
       let cur = this.$store.state.currentLyric - 1;
       if (cur >= 10 && cur < this.lyric.length) {
-        this.transY += 28;
+        this.transY = (cur - this.nowpage) * 28; //作用是为了从其他页面来的没有定位到歌词
+        // this.nowpage++;
+        // this.transY+=28
       }
       return cur;
     },
@@ -120,7 +123,7 @@ export default {
     overflow: hidden;
 
     ul {
-      transition: width 2s, height 2s, transform 1s;
+      transition: transform 1s;
     }
     ul li {
       line-height: 28rem;

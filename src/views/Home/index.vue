@@ -1,13 +1,14 @@
 <template>
   <div class="container">
-    <div class="bag" :style="{ filter: `blur(${filters}px)` }">
-      <img id="bag" src="" alt="" />
+    <div class="bag">
+      <img id="bag" src="http://p3.music.126.net/Ggpf7jURLCUKKlT4qAUW4Q==/109951165929809633.jpg" alt="" />
     </div>
     <div class="bag1">
-      <img id="bag1" src="" alt="" />
+      <img id="bag1" src="http://p3.music.126.net/Ggpf7jURLCUKKlT4qAUW4Q==/109951165929809633.jpg" alt="" />
     </div>
     <div class="top">
       <van-tabs
+        swipeable
         title-active-color="#ffffff"
         title-inactive-color="#c5c5c5"
         v-model="active"
@@ -43,18 +44,19 @@ export default {
       return this.$store.state.fil;
     },
   },
-  watch: {
-    fil() {
-      this.filters=100
-     
-      let interval = setInterval(() => {
-        this.filters -= 1;
-        if (this.filters < 5) {
-          clearInterval(interval);
-        }
-      }, 600);
-    },
-  },
+  // watch: {
+  //   fil() {
+  // :style="{ filter: `blur(${filters}px)` }
+  // this.filters=100
+
+  // let interval = setInterval(() => {
+  //   this.filters -= 1;
+  //   if (this.filters < 5) {
+  //     clearInterval(interval);
+  //   }
+  // }, 1000);
+  //   },
+  // },
   methods: {
     changtab(val) {
       this.$router.push({
@@ -95,7 +97,7 @@ export default {
   .bag {
     position: fixed;
     margin: auto;
-
+    filter: blur(2rem);
     top: 0;
     left: 0;
     bottom: 0;
