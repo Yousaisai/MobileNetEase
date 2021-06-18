@@ -1,16 +1,12 @@
 <template>
   <div class="container">
     <div class="bag">
-      <img
-        id="bag"
-        src="http://p3.music.126.net/Ggpf7jURLCUKKlT4qAUW4Q==/109951165929809633.jpg"
-        alt=""
-      />
+      <img id="bag" src="@/icons/pic/bag.png" alt="" />
     </div>
     <div class="bag1">
       <img
         id="bag1"
-        src="http://p3.music.126.net/Ggpf7jURLCUKKlT4qAUW4Q==/109951165929809633.jpg"
+        src="@/icons/pic/bag.png"
         alt=""
       />
     </div>
@@ -43,7 +39,6 @@ export default {
   mounted() {
     let name = this.$route.name;
     this.active = this.routeList.indexOf(name);
-    
   },
   computed: {
     fil() {
@@ -97,6 +92,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 0.5;
     img {
       width: 75vw;
       height: 75vw;
