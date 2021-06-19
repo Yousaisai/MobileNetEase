@@ -18,7 +18,7 @@ const routes = [
       {
         path: "/isplay",
         name: "isplay",
-        component: () => import("@/views/IsPlay/index.vue"),
+        component: () => import("@/views/isPlay/index.vue"),
       },
       {
         path: "/playlist",

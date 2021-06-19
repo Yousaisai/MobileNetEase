@@ -34,7 +34,7 @@
             {{ popdata.ar ? popdata.ar[0].name : "" }}
           </div>
         </div>
-       
+
         <div class="item" @click="album">
           <div><svg-icon icon-class="zhuanji" /></div>
           <div class="item_text">{{ popdata.al ? popdata.al.name : "" }}</div>
@@ -97,8 +97,8 @@ export default {
     AddMusic(song) {
       this.$store.dispatch("AddMusic", this.popdata);
       Notify({
-        background:"#393239e6",
-        color:"#c5c5c5",
+        background: "#393239e6",
+        color: "#c5c5c5",
         message: "添加成功",
         type: "success",
       });
@@ -160,6 +160,21 @@ export default {
         font-size: 16rem;
         padding-right: 5rem;
       }
+    }
+    &:hover {
+      color: #419afb;
+      animation: horcor 2s;
+    }
+  }
+  @keyframes horcor {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
     }
   }
   .van-popup {

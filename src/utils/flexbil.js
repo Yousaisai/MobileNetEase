@@ -17,6 +17,11 @@
     function setRemUnit () {
       var rem = (document.documentElement.clientWidth
       || document.body.clientWidth || window.innerWidth)/ 375
+      if (rem > 2) {
+        rem = 2;
+      } else if (rem < 1) {
+        rem = 1;
+      }
       docEl.style.fontSize = rem + 'px'
     }
   

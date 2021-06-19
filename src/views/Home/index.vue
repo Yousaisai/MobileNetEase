@@ -4,15 +4,12 @@
       <img id="bag" src="@/icons/pic/bag.png" alt="" />
     </div>
     <div class="bag1">
-      <img
-        id="bag1"
-        src="@/icons/pic/bag.png"
-        alt=""
-      />
+      <img id="bag1" src="@/icons/pic/bag.png" alt="" />
     </div>
     <div class="top">
       <van-tabs
         swipeable
+        v-model="active"
         title-active-color="#ffffff"
         title-inactive-color="#c5c5c5"
         @click="changtab"
@@ -31,6 +28,7 @@ export default {
   components: { elBottom },
   data() {
     return {
+      active: "0",
       tab: ["排行榜", "正在播放", "播放列表", "歌曲搜索"],
       routeList: ["toplist", "isplay", "playlist", "search"],
     };
@@ -40,11 +38,7 @@ export default {
     let name = this.$route.name;
     this.active = this.routeList.indexOf(name);
   },
-  computed: {
-    fil() {
-      return this.$store.state.fil;
-    },
-  },
+
   methods: {
     changtab(val) {
       this.$router.push({
@@ -92,12 +86,64 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    opacity: 0.5;
+    opacity: 0.8;
+    transition: filter 1s;
+    animation: mymove 20s infinite; /*Safari and Chrome*/
+    animation-fill-mode: forwards;
+    -webkit-animation: mymove 20s infinite; /*Safari and Chrome*/
+    -webkit-animation-fill-mode: forwards;
     img {
       width: 75vw;
       height: 75vw;
       border-radius: 50%;
-      animation: rotateImg 20s linear infinite;
+      animation: rotateImg 30s linear infinite;
+      -webkit-animation: rotateImg 30s linear infinite;
+    }
+    @-webkit-keyframes mymove /*Safari and Chrome*/ {
+      0% {
+        -webkit-ttransform: scale(0.5);
+        -webkit-tfilter: blur(100px);
+      }
+      15% {
+        -webkit-ttransform: scale(0.75);
+        -webkit-tfilter: blur(75px);
+      }
+      50% {
+        -webkit-ttransform: scale(1);
+        -webkit-tfilter: blur(0px);
+      }
+
+      85% {
+        -webkit-ttransform: scale(0.75);
+        -webkit-tfilter: blur(75px);
+      }
+      100% {
+        -webkit-ttransform: scale(0.5);
+        -webkit-tfilter: blur(100px);
+      }
+    }
+    @keyframes mymove /*Safari and Chrome*/ {
+      0% {
+        transform: scale(0.5);
+        filter: blur(100px);
+      }
+      15% {
+        transform: scale(0.75);
+        filter: blur(75px);
+      }
+      50% {
+        transform: scale(1);
+        filter: blur(0px);
+      }
+
+      85% {
+        transform: scale(0.75);
+        filter: blur(75px);
+      }
+      100% {
+        transform: scale(0.5);
+        filter: blur(100px);
+      }
     }
     @keyframes rotateImg {
       0% {

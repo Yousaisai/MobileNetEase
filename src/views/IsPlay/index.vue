@@ -1,6 +1,5 @@
 <template>
   <div class="content">
-
     <div class="title" v-if="lyric.length != 0">
       <div class="song">
         {{ watchsong.time != 0 ? watchsong.onesong.name : onesong.name }}
@@ -61,11 +60,12 @@ export default {
   },
   methods: {
     async getLyric() {
-      if (this.onesong.length == 0) {
+      console.log(this.watchsong, this.onesong);
+      if (this.watchsong.time == 0 && this.onesong.length == 0) {
         Notify({
           background: "#393239e6",
           color: "#c5c5c5",
-          message: "暂无播放列表",
+          message: "暂无播放资源",
           type: "success",
         });
         return;
@@ -137,11 +137,46 @@ export default {
       line-height: 28rem;
       font-size: 13rem;
     }
-
+    li:hover {
+      color: #419afb;
+      animation: horcor 2s;
+    }
     .corly {
       color: #31c27c;
       transform: scale(1.2);
-      transition: width 2s, height 2s, transform 0.8s;
+      transition: transform 2s;
+      animation: cor 2s infinite;
+    }
+  }
+  @keyframes horcor {
+    0% {
+      color: #31c27c;
+      transform: scale(1);
+    }
+    50% {
+      color: #419afb;
+      transform: scale(1.2);
+    }
+    100% {
+      color: #31c27c;
+      transform: scale(1);
+    }
+  }
+  @keyframes cor {
+    0% {
+      color: #31c27c;
+    }
+    25% {
+      color: #419afb;
+    }
+    50% {
+      color: #31c27c;
+    }
+    75% {
+      color: #419afb;
+    }
+    100% {
+      color: #31c27c;
     }
   }
   .isNull {

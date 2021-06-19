@@ -241,7 +241,20 @@ export default {
           font-size: 16rem;
           padding-right: 5rem;
         }
-      }
+      }  &:hover {
+      color: #419afb;
+      animation: horcor 2s;
+    }
+    }
+  }  @keyframes horcor {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
     }
   }
   .van-popup {

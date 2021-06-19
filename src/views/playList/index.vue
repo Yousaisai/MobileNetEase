@@ -5,7 +5,8 @@
     </div>
   </div>
 </template>
-<script>import { Notify } from "vant";
+<script>
+import { Notify } from "vant";
 import Table from "@/components/Table";
 export default {
   components: { Table },
@@ -40,12 +41,12 @@ export default {
         if (res) {
           this.playlist = res;
         } else {
-            Notify({
-        background:"#393239e6",
-        color:"#c5c5c5",
-        message: "暂无播放资源",
-        type: "success",
-      });
+          Notify({
+            background: "#393239e6",
+            color: "#c5c5c5",
+            message: "暂无播放列表",
+            type: "success",
+          });
         }
       }
     },
