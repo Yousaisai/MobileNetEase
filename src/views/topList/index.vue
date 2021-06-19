@@ -12,7 +12,6 @@
   </div>
 </template>
 <script>
-
 import { topList } from "@/api/index";
 export default {
   data() {
@@ -52,7 +51,7 @@ export default {
   flex-wrap: wrap;
   box-sizing: border-box;
   padding: 10rem;
-  
+
   overflow: scroll;
   .item {
     box-sizing: border-box;
@@ -62,8 +61,11 @@ export default {
 
     img {
       border-radius: 5rem;
-      // width: 65rem;
-      // height: 65rem;
+      transition: transform 1.5s;
+      &:hover {
+        transform: scale(1.1);
+        transition: transform 1.5s;
+      }
     }
     .title {
       font-size: 12rem;

@@ -138,7 +138,7 @@ export default {
       font-size: 13rem;
     }
     li:hover {
-      color: #419afb;
+      color: #e1e1e1;
       animation: horcor 2s;
     }
     .corly {
