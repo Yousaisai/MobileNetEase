@@ -60,7 +60,6 @@ export default {
   },
   methods: {
     async getLyric() {
-      console.log(this.watchsong, this.onesong);
       if (this.watchsong.time == 0 && this.onesong.length == 0) {
         Notify({
           background: "#393239e6",

@@ -139,7 +139,6 @@ export default {
 
 <style lang="scss" scoped>
 .content {
-  $radio-size: 8rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -175,7 +174,7 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
-      .van-radio {
+      .van-radio {height: 18rem;
         transform: scale(0.8);
       }
       .van-radio__label {
