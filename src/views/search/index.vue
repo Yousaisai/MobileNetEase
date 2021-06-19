@@ -242,7 +242,7 @@ export default {
           padding-right: 5rem;
         }
       }  &:hover {
-      color: #419afb;
+      color: #31c27c;
       animation: horcor 2s;
     }
     }
