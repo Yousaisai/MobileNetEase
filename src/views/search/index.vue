@@ -111,7 +111,7 @@ export default {
       if (res.code != 200) {
         //   Notify('通知内容');
         Notify({
-          background: "#393239",
+          background: "#393239e6",
           color: "#c5c5c5",
           message: res.error,
         });
@@ -263,7 +263,7 @@ export default {
       padding: 0.05rem 0.15rem;
       font-size: 0.24rem;
       .item {
-        padding: 0.5rem;
+        padding: 0.03rem;
         display: flex;
         flex-direction: column;
         justify-content: center;

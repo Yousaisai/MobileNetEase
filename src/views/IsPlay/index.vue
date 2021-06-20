@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="ric">
-      <ul :style="{ transform: `translateY(-${transY/100}rem)` }">
+      <ul :style="{ transform: `translateY(-${transY / 100}rem)` }">
         <li
           v-for="(item, index) in lyric"
           :class="index == currentLyric ? 'corly' : 'none'"
@@ -114,7 +114,7 @@ export default {
   flex-direction: column;
   .title {
     text-align: center;
-    padding: 0.10rem 0;
+    padding: 0.1rem 0;
     .song {
       font-size: 0.18rem;
     }
@@ -126,7 +126,6 @@ export default {
   .ric {
     font-size: 0.14rem;
     overflow: hidden;
-
     ul {
       transition: transform 1s;
     }
@@ -177,8 +176,8 @@ export default {
     }
   }
   .isNull {
-    width: 1.00rem;
-    height: 1.00rem;
+    width: 1rem;
+    height: 1rem;
     margin: 0 auto;
   }
 }

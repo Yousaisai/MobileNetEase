@@ -210,14 +210,6 @@ export default new Vuex.Store({
       //下面是切换背景图
       document.getElementById("bag").src = state.SongDetail.cover;
       document.getElementById("bag1").src = state.SongDetail.cover;
-      // let fil = 100;
-
-      // let interval = setInterval(() => {
-      //   fil -= 5;
-      //   if (fil < 5) {
-      //     clearInterval(interval);
-      //   }  document.getElementById("bag").style.filter = `blur(${fil}px)`;
-      // }, 1000);
     },
     //往播放列表中加入歌曲
     AddMusic({ commit, dispatch, state }, payload) {
