@@ -178,10 +178,7 @@ export default {
         // }
       }
       if (this.$audo.currentTime) {
-        if (
-          parseInt(this.time) == parseInt(this.$audo.currentTime * 1000) ||
-          parseInt(this.time) < parseInt(this.$audo.currentTime * 1000)
-        ) {
+        if (parseInt(this.time / 1000) == parseInt(this.$audo.currentTime)) {
           this.SwitchSongs("next");
         }
         this.SongTime = parseInt(
@@ -192,17 +189,8 @@ export default {
     // 当加载语音流元数据完成后，会触发该事件的回调函数
     // 语音元数据主要是语音的长度之类的数据
     async onLoadedmetadata(res) {
-      var interval = null;
-      this.remaintime = this.time;
-      clearInterval(interval);
-      interval = setInterval(() => {
-        this.remaintime = this.time - parseInt(this.$audo.currentTime * 1000);
-
-        if (this.time < 1000) {
-          clearInterval(interval);
-        }
-      }, 1000);
-      this.time = parseInt(res.target.duration * 1000);
+      let res1 = res.srcElement ? res.srcElement : res.target;
+      this.time = parseInt(res1.duration * 1000) || this.songDetail.time; //有的浏览器是没有duration的只能使用接口返回的歌曲信息。之所以使用原生返回的，是因为上面的切歌是使用的audio原生的对比。
       if (this.playing) {
         this.start();
       }
@@ -212,6 +200,16 @@ export default {
       this.tit = ` 正在播放：${this.name} - ${
         this.onesong.ar ? this.onesong.ar[0].name : this.onesong.artists[0].name
       }  `;
+
+      var interval = null;
+      this.remaintime = this.time;
+      clearInterval(interval);
+      interval = setInterval(() => {
+        this.remaintime = this.time - parseInt(this.$audo.currentTime * 1000);
+        if (this.time < 1000) {
+          clearInterval(interval);
+        }
+      }, 1000);
     },
     //切换歌曲
     SwitchSongs(val) {
