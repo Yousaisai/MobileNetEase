@@ -97,10 +97,9 @@ export default {
     AddMusic(song) {
       this.$store.dispatch("AddMusic", this.popdata);
       Notify({
-        background: "#393239e6",
+        background: "#393239",
         color: "#c5c5c5",
         message: "添加成功",
-        type: "success",
       });
     },
   },

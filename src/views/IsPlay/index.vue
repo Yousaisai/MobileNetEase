@@ -62,10 +62,9 @@ export default {
     async getLyric() {
       if (this.watchsong.time == 0 && this.onesong.length == 0) {
         Notify({
-          background: "#393239e6",
+          background: "#393239",
           color: "#c5c5c5",
           message: "暂无播放资源",
-          type: "success",
         });
         return;
       }
@@ -75,10 +74,9 @@ export default {
       );
       if (res.nolyric) {
         Notify({
-          background: "#393239e6",
+          background: "#393239",
           color: "#c5c5c5",
           message: "抱歉，暂无歌词!",
-          type: "warning",
         });
         this.lyricText = "";
         return;

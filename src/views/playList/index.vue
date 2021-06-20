@@ -42,10 +42,9 @@ export default {
           this.playlist = res;
         } else {
           Notify({
-            background: "#393239e6",
+            background: "#393239",
             color: "#c5c5c5",
             message: "暂无播放列表",
-            type: "success",
           });
         }
       }

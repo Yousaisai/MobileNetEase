@@ -228,10 +228,9 @@ export default {
       var res = await SongLyric(id);
       if (!res.lrc) {
         Notify({
-          background: "#393239e6",
+          background: "#393239",
           color: "#c5c5c5",
           message: "抱歉，暂无歌词!",
-          type: "warning",
         });
         this.lyricText = "";
         return;

@@ -111,9 +111,8 @@ export default {
       if (res.code != 200) {
         //   Notify('通知内容');
         Notify({
-          background: "#393239e6",
+          background: "#393239",
           color: "#c5c5c5",
-          type: "warning",
           message: res.error,
         });
         return;

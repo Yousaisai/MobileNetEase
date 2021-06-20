@@ -122,10 +122,9 @@ export default new Vuex.Store({
         auth = auth.message;
         if (auth != "ok") {
           Notify({
-            background: "#393239e6",
+            background: "#393239",
             color: "#c5c5c5",
             message: auth,
-            type: "warning",
           });
           return;
         } else {
@@ -133,15 +132,14 @@ export default new Vuex.Store({
         }
       } catch (e) {
         Notify({
-          background: "#393239e6",
+          background: "#393239",
           color: "#c5c5c5",
           message: "暂无播放资源",
-          type: "warning",
         });
       }
     },
     async SwitchSong({ commit, state, dispatch }, payload) {
-      state.currentLyric=0
+      state.currentLyric = 0;
       var nextSong = {};
       if (state.AllSongs.length == 0) {
         state.AllSongs = JSON.parse(localStorage.getItem("AllSongs"));
@@ -168,10 +166,9 @@ export default new Vuex.Store({
           dispatch("AuthSongId", nextSong);
         } else {
           Notify({
-            background: "#393239e6",
+            background: "#393239",
             color: "#c5c5c5",
             message: auth,
-            type: "warning",
           });
           return;
         }
@@ -179,10 +176,9 @@ export default new Vuex.Store({
         //TODO handle the exception
 
         Notify({
-          background: "#393239e6",
+          background: "#393239",
           color: "#c5c5c5",
           message: "暂无播放资源",
-          type: "warning",
         });
       }
     },
@@ -215,7 +211,7 @@ export default new Vuex.Store({
       document.getElementById("bag").src = state.SongDetail.cover;
       document.getElementById("bag1").src = state.SongDetail.cover;
       // let fil = 100;
-    
+
       // let interval = setInterval(() => {
       //   fil -= 5;
       //   if (fil < 5) {
@@ -239,10 +235,9 @@ export default new Vuex.Store({
     DownLoadAllMusic({ state }, payload) {
       if (payload.url == null) {
         Notify({
-          background: "#393239e6",
+          background: "#393239",
           color: "#c5c5c5",
           message: "暂无下载资源",
-          type: "warning",
         });
         return;
       }

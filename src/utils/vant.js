@@ -10,8 +10,11 @@ import {
   Progress,
   Slider,
   Search,
-  Notify,Loading,
-  ShareSheet,Popup,Lazyload
+  Notify,
+  Loading,
+  ShareSheet,
+  Popup,
+  Lazyload,
 } from "vant";
 let map = [
   Button,
@@ -21,15 +24,17 @@ let map = [
   TabbarItem,
   Tab,
   Tabs,
-  Progress,Loading,
-  Slider,Lazyload,
-  
+  Progress,
+  Loading,
+  Slider,
+  Lazyload,
   Search,
-  ShareSheet,Popup
+  ShareSheet,
+  Popup,
 ];
+import { Image as VanImage } from "vant";
+Vue.use(Notify);
+Vue.use(VanImage);
 map.forEach((e) => {
   Vue.use(e);
 });
-import { Image as VanImage ,} from 'vant';
-Vue.use(Notify)
-Vue.use(VanImage)
