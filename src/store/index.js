@@ -141,6 +141,7 @@ export default new Vuex.Store({
       }
     },
     async SwitchSong({ commit, state, dispatch }, payload) {
+      state.currentLyric=0
       var nextSong = {};
       if (state.AllSongs.length == 0) {
         state.AllSongs = JSON.parse(localStorage.getItem("AllSongs"));

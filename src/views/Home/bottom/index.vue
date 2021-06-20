@@ -29,7 +29,6 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
       @timeupdate="onTimeupdate"
       @loadedmetadata="onLoadedmetadata"
       preload="auto"
-   
     ></audio>
     <div class="left">
       <div class="item">
@@ -56,7 +55,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
         </van-slider>
       </div>
 
-      <span v-show="!isLoading"> {{ milltosecond(time) }}</span>
+      <span v-show="!isLoading"> {{ milltosecond(remaintime) }}</span>
       <van-loading
         type="spinner"
         size="18px"
@@ -89,6 +88,7 @@ export default {
       currentLyric: 0, //当前歌词行数
       lyricText: "音乐歌词", //当前歌词
       tit: document.title,
+      remaintime: 0, //剩余时间
     };
   },
   computed: {
@@ -100,7 +100,7 @@ export default {
     },
   },
   mounted() {
-   this.$audo=document.getElementById("aud")
+    this.$audo = document.getElementById("aud");
   },
   watch: {
     songDetail: {
@@ -147,9 +147,9 @@ export default {
       this.$audo.pause();
     },
     //播放
-    start() {  
+    start() {
       this.playing = true;
-      this.$audo&&this.$audo.play();
+      this.$audo && this.$audo.play();
     },
     // 快进，快退
     editTime(val) {
@@ -179,7 +179,8 @@ export default {
       }
       if (this.$audo.currentTime) {
         if (
-          parseInt(this.time) == parseInt(this.$audo.currentTime * 1000)
+          parseInt(this.time) == parseInt(this.$audo.currentTime * 1000) ||
+          parseInt(this.time) < parseInt(this.$audo.currentTime * 1000)
         ) {
           this.SwitchSongs("next");
         }
@@ -191,6 +192,16 @@ export default {
     // 当加载语音流元数据完成后，会触发该事件的回调函数
     // 语音元数据主要是语音的长度之类的数据
     async onLoadedmetadata(res) {
+      var interval = null;
+      this.remaintime = this.time;
+      clearInterval(interval);
+      interval = setInterval(() => {
+        this.remaintime = this.time - parseInt(this.$audo.currentTime * 1000);
+
+        if (this.time < 1000) {
+          clearInterval(interval);
+        }
+      }, 1000);
       this.time = parseInt(res.target.duration * 1000);
       if (this.playing) {
         this.start();
@@ -201,10 +212,6 @@ export default {
       this.tit = ` 正在播放：${this.name} - ${
         this.onesong.ar ? this.onesong.ar[0].name : this.onesong.artists[0].name
       }  `;
-      // if (this.onesong.id) {
-      //   this.getLyric(this.onesong.id);
-      //   this.lyric = [];
-      // }
     },
     //切换歌曲
     SwitchSongs(val) {
