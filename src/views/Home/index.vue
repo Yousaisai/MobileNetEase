@@ -162,7 +162,7 @@ export default {
     }
   }
   /deep/.top {
-    height: 42rem;
+    height: 0.42rem;
     .van-tabs__nav {
       background: rgba(0, 0, 0, 0);
     }
@@ -176,7 +176,7 @@ export default {
     position: relative;
   }
   .bottom {
-    height: 48rem;
+    height: 0.48rem;
   }
 }
 </style>

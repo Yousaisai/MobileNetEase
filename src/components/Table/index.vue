@@ -9,7 +9,7 @@
         <div class="ind">
           <span v-show="PlayIndex != index">{{ index + 1 }}</span>
           <img
-            style="color: #666666; padding: 0 5rem 0 0"
+            style="color: #666666; padding: 0 0.5rem 0 0"
             v-show="PlayIndex == index"
             src="@/icons/svg/wave.gif"
           />
@@ -26,7 +26,7 @@
         </div>
       </div>
     </div>
-    <van-popup v-model="show" position="bottom" :style="{ height: '68rem' }">
+    <van-popup v-model="show" position="bottom" :style="{ height: '0.68rem' }">
       <div class="pop">
         <div class="item" @click="singer">
           <div><svg-icon icon-class="yonghu" /></div>
@@ -112,13 +112,13 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  font-size: 12rem;
+  font-size: 0.12rem;
   .title {
     display: flex;
-    padding-top: 5rem;
+    padding-top: 0.05rem;
     .item1 {
       flex: 1.5;
-      transform: translateX(40rem);
+      transform: translateX(0.40rem);
     }
     .item2 {
       flex: 1;
@@ -127,26 +127,27 @@ export default {
   .items {
     display: flex;
     justify-content: space-between;
-    line-height: 36rem;
-    padding: 10rem;
+    line-height: 0.36rem;
+    padding: 0.10rem;
     box-sizing: border-box;
     border-bottom: 1.5px solid rgba(150, 150, 150, 0.1);
+    transition:transform 2s;
     .item1 {
       flex: 1.5;
       display: flex;
       box-sizing: border-box;
       justify-content: flex-start;
       .ind {
-        width: 30rem;
+        width: 0.30rem;
       }
       .name {
-        width: 120rem;
+        width: 1.20rem;
         white-space: nowrap;
         overflow: hidden; //超出的文本隐藏
         text-overflow: ellipsis; //溢出用省略号显示
       }
       .null {
-        width: 20rem;
+        width: 0.20rem;
       }
     }
     .item2 {
@@ -157,8 +158,8 @@ export default {
       display: flex;
       justify-content: space-between;
       .opt {
-        font-size: 16rem;
-        padding-right: 5rem;
+        font-size: 0.16rem;
+        padding-right: 0.05rem;
       }
     }
     &:hover {
@@ -182,19 +183,19 @@ export default {
     .pop {
       display: flex;
       justify-content: space-between;
-      padding: 5rem 15rem;
-      font-size: 24rem;
+      padding: 0.05rem 0.15rem;
+      font-size: 0.24rem;
       .item {
-        padding: 3rem;
+        padding: 0.03rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         .item_text {
-          padding-top: 5rem;
-          font-size: 12rem;
+          padding-top: 0.05rem;
+          font-size: 0.12rem;
           transform: scale(0.9);
-          min-width: 58rem;
+          min-width: 0.58rem;
           text-align: center;
           white-space: nowrap;
           overflow: hidden; //超出的文本隐藏

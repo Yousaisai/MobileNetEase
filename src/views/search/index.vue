@@ -48,7 +48,7 @@
         </div>
       </div>
     </div>
-    <van-popup v-model="show" position="bottom" :style="{ height: '68rem' }">
+    <van-popup v-model="show" position="bottom" :style="{ height: '0.68rem' }">
       <div class="pop">
         <div class="item">
           <div><svg-icon icon-class="yonghu" /></div>
@@ -158,9 +158,9 @@ export default {
         color: #c5c5c5;
       }
       .van-search .van-cell {
-        border: 1rem solid #c5c5c5;
-        padding: 4rem 8rem;
-        border-radius: 5rem;
+        border: 0.01rem solid #c5c5c5;
+        padding: 0.04rem 0.08rem;
+        border-radius: 0.05rem;
       }
       .van-search__content {
         color: red;
@@ -174,7 +174,7 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
-      .van-radio {height: 18rem;
+      .van-radio {height: 0.18rem;
         transform: scale(0.8);
       }
       .van-radio__label {
@@ -186,13 +186,13 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    font-size: 12rem;
+    font-size: 0.12rem;
     .title {
       display: flex;
-      padding-top: 5rem;
+      padding-top: 0.05rem;
       .item1 {
         flex: 1.5;
-        transform: translateX(40rem);
+        transform: translateX(0.40rem);
       }
       .item2 {
         flex: 1;
@@ -201,8 +201,8 @@ export default {
     .items {
       display: flex;
       justify-content: space-between;
-      line-height: 36rem;
-      padding: 10rem;
+      line-height: 0.36rem;
+      padding: 0.10rem;
       box-sizing: border-box;
       border-bottom: 1.5px solid rgba(150, 150, 150, 0.1);
       .item1 {
@@ -211,16 +211,16 @@ export default {
         box-sizing: border-box;
         justify-content: flex-start;
         .ind {
-          width: 30rem;
+          width: 0.30rem;
         }
         .name {
-          width: 120rem;
+          width: 1.20rem;
           white-space: nowrap;
           overflow: hidden; //超出的文本隐藏
           text-overflow: ellipsis; //溢出用省略号显示
         }
         .null {
-          width: 20rem;
+          width: 0.20rem;
         }
       }
       .item2 {
@@ -231,14 +231,14 @@ export default {
         display: flex;
         justify-content: space-between;
         .singer {
-          width: 100rem;
+          width: 1.00rem;
           white-space: nowrap;
           overflow: hidden; //超出的文本隐藏
           text-overflow: ellipsis; //溢出用省略号显示
         }
         .opt {
-          font-size: 16rem;
-          padding-right: 5rem;
+          font-size: 0.16rem;
+          padding-right: 0.05rem;
         }
       }  &:hover {
       color: #31c27c;
@@ -261,19 +261,19 @@ export default {
     .pop {
       display: flex;
       justify-content: space-between;
-      padding: 5rem 15rem;
-      font-size: 24rem;
+      padding: 0.05rem 0.15rem;
+      font-size: 0.24rem;
       .item {
-        padding: 5rem;
+        padding: 0.5rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         .item_text {
-        padding-top: 5rem;
-          font-size: 12rem;
+        padding-top: 0.05rem;
+          font-size: 0.12rem;
           transform: scale(0.9);
-          min-width: 58rem;
+          min-width: 0.58rem;
           text-align: center;
           white-space: nowrap;
           overflow: hidden; //超出的文本隐藏

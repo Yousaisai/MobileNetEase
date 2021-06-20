@@ -6,5 +6,5 @@
 <style>
 #app{
 color:#e1e1e1;
-font-size: 14rem;}
+font-size: 0.14rem;}
 </style>

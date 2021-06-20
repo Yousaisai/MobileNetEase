@@ -47,7 +47,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
       <div class="slider">
         <van-slider
           v-model="SongTime"
-          bar-height="4rem"
+          bar-height="0.04rem"
           button-size="12px"
           @change="editTime"
           inactive-color="#c5c5c5"

@@ -60,8 +60,8 @@ export default {
   width: 100%;
   height: 100%;
   .isNull {
-    width: 100rem;
-    height: 100rem;
+    width: 1.00rem;
+    height: 1.00rem;
     margin: 0 auto;
     text-align: center;
   }

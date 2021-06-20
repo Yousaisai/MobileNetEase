@@ -50,17 +50,17 @@ export default {
   align-items: center;
   flex-wrap: wrap;
   box-sizing: border-box;
-  padding: 10rem;
+  padding: 0.10rem;
 
   overflow: scroll;
   .item {
     box-sizing: border-box;
     width: 33%;
     text-align: center;
-    padding: 5rem 1rem;
+    padding: 0.05rem 0.01rem;
 
     img {
-      border-radius: 5rem;
+      border-radius: 0.05rem;
       transition: transform 1.5s;
       &:hover {
         transform: scale(1.1);
@@ -68,8 +68,8 @@ export default {
       }
     }
     .title {
-      font-size: 12rem;
-      padding: 5rem 0;
+      font-size: 0.12rem;
+      padding: 0.05rem 0;
       white-space: nowrap;
       overflow: hidden; //超出的文本隐藏
       text-overflow: ellipsis; //溢出用省略号显示

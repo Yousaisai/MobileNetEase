@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="ric">
-      <ul :style="{ transform: `translateY(-${transY}rem)` }">
+      <ul :style="{ transform: `translateY(-${transY/100}rem)` }">
         <li
           v-for="(item, index) in lyric"
           :class="index == currentLyric ? 'corly' : 'none'"
@@ -116,25 +116,25 @@ export default {
   flex-direction: column;
   .title {
     text-align: center;
-    padding: 10rem 0;
+    padding: 0.10rem 0;
     .song {
-      font-size: 18rem;
+      font-size: 0.18rem;
     }
     .singer {
-      font-size: 12rem;
+      font-size: 0.12rem;
       transform: scale(0.85);
     }
   }
   .ric {
-    font-size: 14rem;
+    font-size: 0.14rem;
     overflow: hidden;
 
     ul {
       transition: transform 1s;
     }
     ul li {
-      line-height: 28rem;
-      font-size: 13rem;
+      line-height: 0.28rem;
+      font-size: 0.13rem;
     }
     li:hover {
       color: #e1e1e1;
@@ -179,8 +179,8 @@ export default {
     }
   }
   .isNull {
-    width: 100rem;
-    height: 100rem;
+    width: 1.00rem;
+    height: 1.00rem;
     margin: 0 auto;
   }
 }

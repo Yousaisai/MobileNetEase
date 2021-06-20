@@ -15,13 +15,10 @@
   
     // set 1rem = viewWidth / 10
     function setRemUnit () {
+      //注意使用rem做单位的时候，千万不能使用fantasize小于12px,原来的是除以375，会让个别浏览器不兼容。因为跟元素小于了12px，浏览器就会默认设为12px，最小单位，解决办法就是设的尽可能的大。
       var rem = (document.documentElement.clientWidth
-      || document.body.clientWidth || window.innerWidth)/ 375
-      if (rem > 2) {
-        rem = 2;
-      } else if (rem < 1) {
-        rem = 1;
-      }
+      || document.body.clientWidth || window.innerWidth)/ 3.75
+  
       docEl.style.fontSize = rem + 'px'
     }
   
