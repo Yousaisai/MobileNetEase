@@ -29,7 +29,10 @@
         </van-radio-group>
       </div>
     </div>
-    <div class="songlist">
+    <div v-show="isNetEase" class="songlist">
+      <Table :songlist="MusicData"></Table>
+    </div>
+    <div v-show="!isNetEase" class="songlist">
       <div class="items" v-for="(item, index) in MusicData" :key="item.songid">
         <div class="item1" @click="PlaySong(item, index)">
           <div class="ind">
@@ -69,14 +72,17 @@
 </template>
 <script>
 import { Notify } from "vant";
-import { AllNetMusic, DefSearch } from "@/api/index";
+import Table from "@/components/Table";
+import { AllNetMusic, DefSearch, Search } from "@/api/index";
 export default {
+  components: { Table },
   data() {
     return {
       show: false,
       MusicData: [],
       DefPlaceHoder: "请输入关键词",
       popdata: {},
+      isNetEase: false,
       payload: {
         input: "",
         filter: "name",
@@ -96,9 +102,9 @@ export default {
   methods: {
     //默认搜索词
     async getDefSearch() {
-      var res = await DefSearch();
+      let res = await DefSearch();
       this.DefPlaceHoder = "例如：" + res.data.realkeyword;
-      var res1 = await AllNetMusic({
+      let res1 = await AllNetMusic({
         input: res.data.realkeyword,
         filter: "name",
         type: "netease",
@@ -107,17 +113,38 @@ export default {
       this.MusicData = res1.data;
     },
     async getSearch() {
-      var res = await AllNetMusic(this.payload);
-      if (res.code != 200) {
-        //   Notify('通知内容');
-        Notify({
-          background: "#393239e6",
-          color: "#c5c5c5",
-          message: res.error,
+      if (this.payload.type == "netease") {
+        let res = await Search({ keywords: this.payload.input, type: 1 });
+        console.log("res: ", res);
+        this.isNetEase = true;
+        this.MusicData = res.result.songs.map((val) => {
+          return {
+            al: {
+              id: val.album.id,
+              name: val.album.name,
+               picUrl:val.artists[0].img1v1Url
+            },
+            ar: [{ id: val.artists[0].id, name: val.artists[0].name }],
+            id: val.id,
+            name: val.name,
+            dt: val.duration,
+          };
         });
-        return;
+        console.log("this.MusicData : ", this.MusicData);
+      } else {
+        this.isNetEase = false;
+        let res = await AllNetMusic(this.payload);
+        if (res.code != 200) {
+          //   Notify('通知内容');
+          Notify({
+            background: "#393239e6",
+            color: "#c5c5c5",
+            message: res.error,
+          });
+          return;
+        }
+        this.MusicData = res.data;
       }
-      this.MusicData = res.data;
     },
     download(song) {
       this.$store.dispatch("DownLoadAllMusic", song);
@@ -173,7 +200,8 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
-      .van-radio {height: 0.18rem;
+      .van-radio {
+        height: 0.18rem;
         transform: scale(0.8);
       }
       .van-radio__label {
@@ -191,7 +219,7 @@ export default {
       padding-top: 0.05rem;
       .item1 {
         flex: 1.5;
-        transform: translateX(0.40rem);
+        transform: translateX(0.4rem);
       }
       .item2 {
         flex: 1;
@@ -201,7 +229,7 @@ export default {
       display: flex;
       justify-content: space-between;
       line-height: 0.36rem;
-      padding: 0.10rem;
+      padding: 0.1rem;
       box-sizing: border-box;
       border-bottom: 1.5px solid rgba(150, 150, 150, 0.1);
       .item1 {
@@ -210,16 +238,16 @@ export default {
         box-sizing: border-box;
         justify-content: flex-start;
         .ind {
-          width: 0.30rem;
+          width: 0.3rem;
         }
         .name {
-          width: 1.20rem;
+          width: 1.2rem;
           white-space: nowrap;
           overflow: hidden; //超出的文本隐藏
           text-overflow: ellipsis; //溢出用省略号显示
         }
         .null {
-          width: 0.20rem;
+          width: 0.2rem;
         }
       }
       .item2 {
@@ -230,7 +258,7 @@ export default {
         display: flex;
         justify-content: space-between;
         .singer {
-          width: 1.00rem;
+          width: 1rem;
           white-space: nowrap;
           overflow: hidden; //超出的文本隐藏
           text-overflow: ellipsis; //溢出用省略号显示
@@ -239,12 +267,14 @@ export default {
           font-size: 0.16rem;
           padding-right: 0.05rem;
         }
-      }  &:hover {
-      color: #31c27c;
-      animation: horcor 2s;
+      }
+      &:hover {
+        color: #31c27c;
+        animation: horcor 2s;
+      }
     }
-    }
-  }  @keyframes horcor {
+  }
+  @keyframes horcor {
     0% {
       transform: scale(1);
     }
@@ -269,7 +299,7 @@ export default {
         justify-content: center;
         align-items: center;
         .item_text {
-        padding-top: 0.05rem;
+          padding-top: 0.05rem;
           font-size: 0.12rem;
           transform: scale(0.9);
           min-width: 0.58rem;

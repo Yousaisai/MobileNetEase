@@ -20,9 +20,7 @@
     </div>
     <div class="content">
       <transition name="slide-left" mode="out-in">
-        <keep-alive>
-          <router-view></router-view>
-        </keep-alive>
+        <router-view></router-view>
       </transition>
     </div>
     <div class="bottom"><el-bottom></el-bottom></div>
