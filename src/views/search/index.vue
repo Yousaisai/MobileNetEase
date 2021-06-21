@@ -29,10 +29,10 @@
         </van-radio-group>
       </div>
     </div>
-    <div v-show="isNetEase" class="songlist">
+    <div v-if="isNetEase" class="songlist">
       <Table :songlist="MusicData"></Table>
     </div>
-    <div v-show="!isNetEase" class="songlist">
+    <div v-if="!isNetEase" class="songlist">
       <div class="items" v-for="(item, index) in MusicData" :key="item.songid">
         <div class="item1" @click="PlaySong(item, index)">
           <div class="ind">
@@ -115,14 +115,22 @@ export default {
     async getSearch() {
       if (this.payload.type == "netease") {
         let res = await Search({ keywords: this.payload.input, type: 1 });
-        console.log("res: ", res);
+
+        if (res.result.songCount == 0) {
+          Notify({
+            background: "#393239e6",
+            color: "#c5c5c5",
+            message: "未找到歌曲资源",
+          });
+          return;
+        }
         this.isNetEase = true;
         this.MusicData = res.result.songs.map((val) => {
           return {
             al: {
               id: val.album.id,
               name: val.album.name,
-               picUrl:val.artists[0].img1v1Url
+              picUrl: val.artists[0].img1v1Url,
             },
             ar: [{ id: val.artists[0].id, name: val.artists[0].name }],
             id: val.id,
@@ -130,7 +138,6 @@ export default {
             dt: val.duration,
           };
         });
-        console.log("this.MusicData : ", this.MusicData);
       } else {
         this.isNetEase = false;
         let res = await AllNetMusic(this.payload);
