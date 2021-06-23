@@ -3,6 +3,7 @@
     <div class="playlist" v-if="playlist.length != 0">
       <Table :songlist="playlist"></Table>
     </div>
+    <div v-else class="noneric"><span>暂无播放列表</span></div>
   </div>
 </template>
 <script>
@@ -58,9 +59,14 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
+  .noneric {
+    display: flex;
+    justify-content: center;
+  margin: 2.5rem 0;
+  }
   .isNull {
-    width: 1.00rem;
-    height: 1.00rem;
+    width: 1rem;
+    height: 1rem;
     margin: 0 auto;
     text-align: center;
   }
