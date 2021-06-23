@@ -11,13 +11,12 @@
     </van-popup>
     <div class="mvandcom">
       <div class="pinglun" @click="showcom">
-        <!-- <van-icon name="chat-o" badge="99+" /> -->
         <span class="span">{{
           999 > commentData.total ? commentData.total : "999+"
         }}</span>
         <svg-icon icon-class="pinglun" />
       </div>
-      <div class="mv"><svg-icon icon-class="mv" /></div>
+      <div class="mv" @click="playmv"><svg-icon icon-class="mv" /></div>
     </div>
     <div class="title" v-if="lyric.length != 0">
       <div class="song">
@@ -146,6 +145,25 @@ export default {
     },
     showcom() {
       this.showoverlay = true;
+    },
+    playmv() {
+      let mvid =
+        this.watchsong.time != 0 ? this.watchsong.onesong.mv : this.onesong.mv;
+      console.log("mvid: ", mvid);
+      if (mvid == 0) {
+        Notify({
+          background: "#393239",
+          color: "#c5c5c5",
+          message: "抱歉，暂无MV",
+        });
+      } else {
+        this.$router.push({
+          path: "/mv",
+          query: {
+            mvid,
+          },
+        });
+      }
     },
   },
 };

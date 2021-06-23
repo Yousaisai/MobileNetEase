@@ -46,6 +46,10 @@ const routes = [
         path: "/singer",
         name: "singer",
         component: () => import("@/views/singer/index.vue"),
+      },{
+        path: "/mv",
+        name: "mv",
+        component: () => import("@/views/isPlay/mv/index.vue"),
       }
     ],
   },

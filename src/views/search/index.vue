@@ -115,6 +115,7 @@ export default {
     async getSearch() {
       if (this.payload.type == "netease") {
         let res = await Search({ keywords: this.payload.input, type: 1 });
+        console.log('res: ', res);
 
         if (res.result.songCount == 0) {
           Notify({
@@ -136,6 +137,7 @@ export default {
             id: val.id,
             name: val.name,
             dt: val.duration,
+            mv:val.mvid
           };
         });
       } else {
