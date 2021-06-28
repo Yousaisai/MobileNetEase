@@ -140,7 +140,6 @@ export default {
             ? this.watchsong.onesong.id
             : this.onesong.id,
       });
-      console.log("res: ", res);
       this.commentData = res;
     },
     showcom() {
@@ -149,7 +148,6 @@ export default {
     playmv() {
       let mvid =
         this.watchsong.time != 0 ? this.watchsong.onesong.mv : this.onesong.mv;
-      console.log("mvid: ", mvid);
       if (mvid == 0) {
         Notify({
           background: "#393239",
