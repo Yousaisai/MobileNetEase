@@ -54,14 +54,15 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
         >
         </van-slider>
       </div>
-
-      <span v-show="!isLoading"> {{ milltosecond(remaintime) }}</span>
-      <van-loading
-        type="spinner"
-        size="18px"
-        v-show="isLoading"
-        color="#c5c5c5"
-      />
+      <div class="load">
+        <span v-show="!isLoading"> {{ milltosecond(remaintime) }}</span>
+        <van-loading
+          v-show="isLoading"
+          type="spinner"
+          size="0.15rem"
+          color="#c5c5c5"
+        />
+      </div>
     </div>
   </div>
 </template>
