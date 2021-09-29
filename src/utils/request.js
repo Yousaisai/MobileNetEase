@@ -1,10 +1,16 @@
+/*
+ * @Descripttion: 
+ * @Author: Mr.You
+ * @Date: 2021-09-29 16:02:24
+ * @LastEditTime: 2021-09-29 16:03:31
+ */
 import axios from "axios";
 import { getToken } from "@/utils/cookie";
 
 // create an axios instance
 const service = axios.create({
-  baseURL: "http://117.78.27.178:18100", // url = base url + request url
-  // baseURL: "https://autumnfish.cn/", //这个是官方的接口
+  // baseURL: "http://117.78.27.178:18100", // url = base url + request url
+  baseURL: "https://autumnfish.cn/", //这个是官方的接口
   // baseURL: 'http://49.4.79.236:3000', // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 50000, // request timeout

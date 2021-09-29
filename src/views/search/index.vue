@@ -110,7 +110,7 @@ export default {
         type: "netease",
         page: "2",
       });
-      this.MusicData = res1.data;
+      this.MusicData = res1.data.data;
     },
     async getSearch() {
       if (this.payload.type == "netease") {
@@ -152,7 +152,7 @@ export default {
           });
           return;
         }
-        this.MusicData = res.data;
+        this.MusicData = res.data.data;
       }
     },
     download(song) {
